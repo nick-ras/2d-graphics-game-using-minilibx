@@ -24,7 +24,7 @@
 # include <string.h>
 # include <string.h>
 
-void	get_map_using_gnl(int argc, char *argv);
+char	**get_map_using_gnl(int argc, char *argv);
 int main(int argc, char *argv[]);
 
 #endif
