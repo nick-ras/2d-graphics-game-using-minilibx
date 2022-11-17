@@ -15,7 +15,7 @@
 # include <fcntl.h>
 # include "libftprintf/ft_printf.h"
 # include "gnl/get_next_line.h"
-# include <mlx.h>
+# include "/usr/local/include/mlx.h"
 # include <X11/Xfuncproto.h>
 # include <X11/extensions/shm.h>
 # include <X11/Xlib.h>
@@ -24,7 +24,19 @@
 # include <string.h>
 # include <string.h>
 
-char	**get_map_using_gnl(int argc, char *argv);
+typedef struct s_map
+{
+	int rows;
+	int columns;
+	int entrance[2];
+	char **map;
+	char **map2;
+	int collectibles;
+} t_map;
+
+void	dfs(t_map *grid, int count_row, int count_col);
+void check_path_to_exit(t_map *grid);
+t_map *get_map_using_gnl(int argc, char *argv);
 int main(int argc, char *argv[]);
 
 #endif
