@@ -13,8 +13,8 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 # include <fcntl.h>
-# include "../libftprintf/ft_printf.h"
-# include "../gnl/get_next_line.h"
+# include "libftprintf/ft_printf.h"
+# include "Get_Next_Line/get_next_line.h"
 # include <mlx.h>
 # include <X11/Xfuncproto.h>
 # include <X11/extensions/shm.h>
@@ -24,6 +24,7 @@
 # include <string.h>
 # include <string.h>
 
-int	main(void);
+char **get_map_using_gnl(int argc, char *argv);
+int main(int argc, char *argv[]);
 
 #endif

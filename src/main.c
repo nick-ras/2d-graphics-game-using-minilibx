@@ -1,51 +1,45 @@
 #include "../so_long.h"
- 
-int main(void)
+//gcc src/main.c ../libftprintf/libftprintf.a ../gnl/get_next_line.c ../gnl/get_next_line_utils.c && ./a.out src/map.ber 
+
+char **get_map_using_gnl(int argc, char *argv)
 {
-    Display *display;
-    Window window;
-    XEvent event;
-    // char *msg = "Hello, Worlds!!!";
-    int screen;
- 
-    // open connection to the server
-    display = XOpenDisplay(NULL);
-    if (display == NULL)
-    {
-        ft_printf("Cannot open display\n %s\n", stderr);
-        exit(1);
-    }
- 
-    screen = DefaultScreen(display);
- 
-    // create window
-    window = XCreateSimpleWindow(display, RootWindow(display, screen), 100, 100, 500, 300, 1,
-                                 WhitePixel(display, screen), WhitePixel(display, screen));
- 
-    // select kind of events we are interested in
-    XSelectInput(display, window, ExposureMask | KeyPressMask);
- 
-    // map (show) the window
-    XMapWindow(display, window);
- 
-    // event loop
-    while (1)
-    {
-        XNextEvent(display, &event);
- 
-        // // draw or redraw the window
-        // if (event.type == Expose)
-        // {
-        //     XFillRectangle(display, window, DefaultGC(display, screen), 40, 	40, 110, 110);
-        //     XDrawString(display, window, DefaultGC(display, screen), 50, 50, msg, strlen(msg));
-        // }
-        // // exit on key press
-        // if (event.type == KeyPress)
-        //     break;
-    }
- 
-    // close connection to the server
-    // XCloseDisplay(display);
- 
-    return (0);
- }
+	int fd1 = open(argv, O_RDONLY);
+
+	char *str = get_next_line(fd1);
+	int width = 0;
+	int length = ft_strlen(str) - 1;
+	while(str)
+	{
+		ft_printf("%s", str);
+		free(str);
+		str = get_next_line(fd1);
+		width++;
+	}
+	ft_printf(" length %d width %d\n", length, width);
+	close(fd1);
+	fd1 = open(argv, O_RDONLY);
+	char **arrmap = ft_calloc(length, sizeof(char));
+	while (length)
+	{
+		ft_calloc()
+		ft_printf("%s", str);
+		str[i]
+		free(str);
+		str = get_next_line(fd);
+		length--;
+	}
+}
+
+int main(int argc, char *argv[])
+{
+	if (argc != 2)
+	{
+		ft_printf("argc == 2 or under\n");
+		return 0;
+	}
+	ft_printf("%s\n", argv[1]);
+	//test of name of map is..
+
+	get_map_using_gnl(argc, argv[1]);
+	
+}
