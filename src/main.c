@@ -1,7 +1,7 @@
 #include "../so_long.h"
 //gcc src/main.c ../libftprintf/libftprintf.a ../gnl/get_next_line.c ../gnl/get_next_line_utils.c && ./a.out src/map.ber 
 
-char **get_map_using_gnl(int argc, char *argv)
+void	get_map_using_gnl(int argc, char *argv)
 {
 	int fd1 = open(argv, O_RDONLY);
 
@@ -18,16 +18,18 @@ char **get_map_using_gnl(int argc, char *argv)
 	ft_printf(" length %d width %d\n", length, width);
 	close(fd1);
 	fd1 = open(argv, O_RDONLY);
-	char **arrmap = ft_calloc(length, sizeof(char));
-	while (length)
-	{
-		ft_calloc()
-		ft_printf("%s", str);
-		str[i]
-		free(str);
-		str = get_next_line(fd);
-		length--;
-	}
+	// char **arrmap = ft_calloc(length, sizeof(char));
+	// while (length)
+	// {
+	// 	ft_calloc()
+	// 	ft_printf("%s", str);
+	// 	str[i]
+	// 	free(str);
+	// 	str = get_next_line(fd);
+	// 	length--;
+	// }
+	printf("%d", argc);
+	close(fd1);
 }
 
 int main(int argc, char *argv[])
