@@ -53,22 +53,26 @@ void collectibles(t_map *grid, int row_count, int col_count)
 int	dfs(t_map *grid, int count_row, int count_col, int door)
 {
 
-	ft_printf("door found %d\n", door);
+	ft_printf("door count %d\n", door);
 	if (count_row < 0 || count_row >= grid->rows || count_col < 0 || count_col >= grid->columns)
 	{
-		ft_printf("missing barriers\n");
+		ft_printf("missing barrier\n");
 		exit (1);
 	}
-	if (grid->map2[count_row][count_col] == '1' || grid->map2[count_row][count_col] == 'S')
+	if (grid->map2[count_row][count_col] == '1')
 		return door;
 	//extra array in struct
 	if (grid->map2[count_row][count_col] == 'D')
-		door ++;
-	grid->map2[count_row][count_col] = '0';
-	dfs(grid, count_row - 1, count_col, door);
-	dfs(grid, count_row + 1, count_col, door);
-	dfs(grid, count_row, count_col - 1, door);
-	dfs(grid, count_row, count_col + 1, door);
+	{
+		ft_printf("DOOR ENCOUNTERED\n");
+		door++;
+	}
+	grid->map2[count_row][count_col] = '1';
+	door = dfs(grid, count_row - 1, count_col, door);
+	door = dfs(grid, count_row + 1, count_col, door);
+	door = dfs(grid, count_row, count_col - 1, door);
+	door = dfs(grid, count_row, count_col + 1, door);
+	ft_printf("door count end -- %d\n", door);
 	return door;
 }
 
@@ -100,6 +104,11 @@ void check_map(t_map *grid)
 	}
 	int door = 0;
 	door = dfs(grid, grid->S[0], grid->S[1], door);
+	if (door < 0)
+	{
+		ft_printf("missing barrier(s)%d\n", grid->door_check_recursive);
+		exit (1);
+	}
 	if (door < 1)
 	{
 		ft_printf("player cant go to exit, doors%d\n", grid->door_check_recursive);
