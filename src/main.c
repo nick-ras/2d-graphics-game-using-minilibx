@@ -122,18 +122,25 @@ void check_map(t_map *grid)
 	free_map(grid->map2);
 }
 
-t_map *make_grid(t_map *grid, int fd, char *argv)
+t_map *make_grid(t_map *grid, char *argv)
 {
 	int row_count = 0;
+	int	fd;
 
 	fd = open(argv, O_RDONLY);
-	grid->map = ft_calloc(grid->rows, sizeof(char));
+	if (fd != 0)
+	{
+		ft_printf("fd error\n");
+		exit (1);
+	}
+	grid->map = ft_calloc(grid->rows + 1, sizeof(char));
 	while (row_count < grid->rows)
 	{
 		grid->map[row_count] = ft_calloc(grid->columns, sizeof(char));
 		grid->map[row_count] = get_next_line(fd);
 		row_count++;
 	}
+	grid->map[row_count] == NULL;
 	close(fd);
 	row_count = 0;
 	fd = open(argv, O_RDONLY);
@@ -144,6 +151,7 @@ t_map *make_grid(t_map *grid, int fd, char *argv)
 		grid->map2[row_count] = get_next_line(fd);
 		row_count++;
 	}
+	grid->map[row_count] == NULL;
 	close(fd);
 	ft_printf("\nrows %d col %d\n", grid->rows, grid->columns);
 	return grid;
@@ -152,9 +160,16 @@ t_map *make_grid(t_map *grid, int fd, char *argv)
 t_map *get_map_using_gnl(char *argv)
 {
 	t_map *grid;
-	int fd = open(argv, O_RDONLY);
-	char *line_as_str = get_next_line(fd);
-	
+	int fd;
+	char *line_as_str;
+
+	fd = open(argv, O_RDONLY);
+	if (fd != 0)
+	{
+		ft_printf("fd error\n");
+		exit (1);
+	}
+	line_as_str = get_next_line(fd);
 	grid = ft_calloc(1, sizeof *grid); //CHANGED SMTH
 	grid->columns = ft_strlen(line_as_str) - 1;
 	while(line_as_str)
@@ -166,12 +181,13 @@ t_map *get_map_using_gnl(char *argv)
 	}
 	free(line_as_str);
 	close(fd);
+	grid->rows = 4;
 	if (grid->rows < 4 || grid->columns < 4 || grid->rows == grid->columns)
 	{
 		ft_printf("not enough rows or columns or not a rectangle");
 		exit (1);
 	}
-	grid = make_grid(grid, fd, argv);
+	grid = make_grid(grid, argv);
 	check_map(grid);
 	return (grid);
 }
