@@ -128,7 +128,7 @@ t_map *make_grid(t_map *grid, char *argv)
 	int	fd;
 
 	fd = open(argv, O_RDONLY);
-	if (fd != 0)
+	if (fd < 0)
 	{
 		ft_printf("fd error\n");
 		exit (1);
@@ -164,9 +164,10 @@ t_map *get_map_using_gnl(char *argv)
 	char *line_as_str;
 
 	fd = open(argv, O_RDONLY);
-	if (fd != 0)
+	ft_printf("%d", fd);
+	if (fd < 0)
 	{
-		ft_printf("fd error\n");
+		ft_printf("fd error from first open\n");
 		exit (1);
 	}
 	line_as_str = get_next_line(fd);
@@ -181,7 +182,6 @@ t_map *get_map_using_gnl(char *argv)
 	}
 	free(line_as_str);
 	close(fd);
-	grid->rows = 4;
 	if (grid->rows < 4 || grid->columns < 4 || grid->rows == grid->columns)
 	{
 		ft_printf("not enough rows or columns or not a rectangle");
@@ -190,6 +190,23 @@ t_map *get_map_using_gnl(char *argv)
 	grid = make_grid(grid, argv);
 	check_map(grid);
 	return (grid);
+}
+void map_name_check(char *map)
+{
+	char	*ptr;
+	ft_printf("name %s length%d \n", map, ft_strlen(map));
+	if (ft_strnstr(map, ".ber", ft_strlen(map)) == NULL)
+	{
+		ft_printf("name not correct\n");
+		exit (1);
+	}
+	ptr = ft_memchr(map, '.', ft_strlen(map));
+	if (*(ptr + 4 ) !=  '\0')
+	{
+		ft_printf("test %c\n", ptr);
+		ft_printf("char after '.ber'\n");
+		exit (1);
+	}
 }
 
 int main(int argc, char *argv[])
@@ -201,7 +218,7 @@ int main(int argc, char *argv[])
 		ft_printf("argc == 2 or under\n");
 		return 1;
 	}
-	//test of name of map is..
+	map_name_check(argv[1]);
 	grid = get_map_using_gnl(argv[1]);
 	free_map(grid->map);
 	free(grid);
