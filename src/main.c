@@ -52,7 +52,7 @@ void collectibles(t_map *grid, int row_count, int col_count)
 
 int	dfs(t_map *grid, int count_row, int count_col, int door)
 {
-	ft_printf("row %d col %d and inside: %c\n", count_row, count_col, grid->map2[count_row][count_col]);
+	//ft_printf("row %d col %d and inside: %c\n", count_row, count_col, grid->map2[count_row][count_col]);
 	if (count_row < 0 || count_row >= grid->rows || count_col < 0 || count_col >= grid->columns)
 	{
 		ft_printf("missing barrier\n");
@@ -69,12 +69,13 @@ int	dfs(t_map *grid, int count_row, int count_col, int door)
 	door = dfs(grid, count_row, count_col + 1, door);
 	return door;
 }
-void free_map(char **map)
+
+void free_map(char **map, int rows)
 {
 	int i;
 
 	i = 0;
-	while (map[i])
+	while (i < rows)
 	{
 		free(map[i]);
 		i++;
@@ -119,7 +120,7 @@ void check_map(t_map *grid)
 		ft_printf("player cant go to exit, doors%d\n", grid->door_check_recursive);
 		exit (1);
 	}
-	free_map(grid->map2);
+	free_map(grid->map2, grid->rows);
 }
 
 t_map *make_grid(t_map *grid, char *argv)
@@ -140,7 +141,6 @@ t_map *make_grid(t_map *grid, char *argv)
 		grid->map[row_count] = get_next_line(fd);
 		row_count++;
 	}
-	grid->map[row_count] == NULL;
 	close(fd);
 	row_count = 0;
 	fd = open(argv, O_RDONLY);
@@ -151,7 +151,6 @@ t_map *make_grid(t_map *grid, char *argv)
 		grid->map2[row_count] = get_next_line(fd);
 		row_count++;
 	}
-	grid->map[row_count] == NULL;
 	close(fd);
 	ft_printf("\nrows %d col %d\n", grid->rows, grid->columns);
 	return grid;
@@ -171,7 +170,7 @@ t_map *get_map_using_gnl(char *argv)
 		exit (1);
 	}
 	line_as_str = get_next_line(fd);
-	grid = ft_calloc(1, sizeof *grid); //CHANGED SMTH
+	grid = ft_calloc(1, sizeof *grid);
 	grid->columns = ft_strlen(line_as_str) - 1;
 	while(line_as_str)
 	{
@@ -191,6 +190,7 @@ t_map *get_map_using_gnl(char *argv)
 	check_map(grid);
 	return (grid);
 }
+
 void map_name_check(char *map)
 {
 	char	*ptr;
@@ -203,8 +203,12 @@ void map_name_check(char *map)
 	ptr = ft_memchr(map, '.', ft_strlen(map));
 	if (*(ptr + 4 ) !=  '\0')
 	{
-		ft_printf("test %c\n", ptr);
 		ft_printf("char after '.ber'\n");
+		exit (1);
+	}
+	if (ptr ==  map)
+	{
+		ft_printf("char(s) missing before '.ber'\n");
 		exit (1);
 	}
 }
@@ -220,7 +224,7 @@ int main(int argc, char *argv[])
 	}
 	map_name_check(argv[1]);
 	grid = get_map_using_gnl(argv[1]);
-	free_map(grid->map);
+	free_map(grid->map, grid->rows);
 	free(grid);
 	return 0;
 }

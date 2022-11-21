@@ -38,9 +38,15 @@ typedef struct s_map
 	char **map2;
 } t_map;
 
+void	init_grid(t_map *grid);
+void start(t_map *grid, int row_count, int col_count);
+void door(t_map *grid, int row_count, int col_count);
+void collectibles(t_map *grid, int row_count, int col_count);
 int	dfs(t_map *grid, int count_row, int count_col, int door);
-void check_path_to_exit(t_map *grid);
+void free_map(char **map, int rows);
+void check_map(t_map *grid);
+t_map *make_grid(t_map *grid, char *argv);
 t_map *get_map_using_gnl(char *argv);
+void map_name_check(char *map);
 int main(int argc, char *argv[]);
-
 #endif

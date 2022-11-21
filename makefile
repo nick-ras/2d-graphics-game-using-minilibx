@@ -24,7 +24,8 @@ SRC_DIR = 	./src/
 OBJ_DIR =   ./obj/
 
 
-SRC_FILES = main.c, /gnl/get_next_line.c, /gnl/get_next_line_utils.c \ 
+SRC_FILES = main.c ../gnl/get_next_line_utils.c ../gnl/get_next_line.c \
+../gnl/get_next_line.h
 # so_long.c \
 # 		./src/map_render.c \
 # 		./src/map_load.c \
