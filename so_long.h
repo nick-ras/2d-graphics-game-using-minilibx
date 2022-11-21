@@ -31,8 +31,8 @@ typedef struct s_map
 	int S[2];
 	int D[2];
 	int collectibles;
-	int S_found;
-	int D_found;
+	int S_count;
+	int D_count;
 	int door_check_recursive; //not used, delete
 	char **map;
 	char **map2;
@@ -40,7 +40,7 @@ typedef struct s_map
 
 int	dfs(t_map *grid, int count_row, int count_col, int door);
 void check_path_to_exit(t_map *grid);
-t_map *get_map_using_gnl(int argc, char *argv);
+t_map *get_map_using_gnl(char *argv);
 int main(int argc, char *argv[]);
 
 #endif
