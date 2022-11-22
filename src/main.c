@@ -7,10 +7,10 @@ void	init_grid(t_map *grid)
 	grid->D_count = 0;
 	grid->collectibles = 0;
 	grid->door_check_recursive = 0;
-	grid->S[0] = 0;
-	grid->S[1] = 0;
-	grid->D[0] = 0;
-	grid->D[1] = 0;
+	grid->Start[0] = 0;
+	grid->Start[1] = 0;
+	grid->Door[0] = 0;
+	grid->Door[1] = 0;
 }
 
 void start(t_map *grid, int row_count, int col_count)
@@ -22,8 +22,8 @@ void start(t_map *grid, int row_count, int col_count)
 			ft_printf("too many entrances\n");
 			free_map(grid, 1);
 		}
-		grid->S[0] = row_count;
-		grid->S[1] = col_count;
+		grid->Start[0] = row_count;
+		grid->Start[1] = col_count;
 		grid->S_count++;
 	}
 }
@@ -37,8 +37,8 @@ void door(t_map *grid, int row_count, int col_count)
 			ft_printf("too many doors\n");
 			free_map(grid, 1);
 		}
-		grid->D[0] = row_count;
-		grid->D[1] = col_count;
+		grid->Door[0] = row_count;
+		grid->Door[1] = col_count;
 		// ft_printf("door %d and %d \n", grid->D[0], grid->D[1]);
 		grid->D_count++;
 	}
@@ -122,7 +122,7 @@ void before_recursion(t_map *grid)
 	int door;
 
 	door = 0;
-	door = dfs(grid, grid->S[0], grid->S[1], door);
+	door = dfs(grid, grid->Start[0], grid->Start[1], door);
 	ft_printf("\ndoor check after %d\n", door);
 	if (door < 0)
 	{
@@ -240,6 +240,57 @@ void map_name_check(char *map)
 	}
 }
 
+void	ft_map_data(t_map *data, char *name)
+{
+	data->hight = 0;
+	data->lenght = 0;
+	data->escape = 0;
+	data->count = 0;
+	data->step = 0;
+	data->x = 0;
+	data->y = 0;
+	data->player = 0;
+	data->fn = name;
+	ft_parse_map(data);
+}
+
+int	ft_frame(t_map *data)
+{
+	mlx_clear_window(data->mlx, data->win);
+	ft_create_map(data);
+	if (data->count == 0 && data->player == 1 && data->escape == 1)
+		ft_game_result(data);
+	return (0);
+}
+
+void	ft_parse_map(t_map *data)
+{
+	int	img_hight;
+	int	img_width;
+
+	data->graph = malloc(sizeof(t_graph));
+	data->graph->player = mlx_xpm_file_to_image(data->mlx,
+			PLAYER, &img_width, &img_hight);
+	data->graph->wall = mlx_xpm_file_to_image(data->mlx,
+			WALL, &img_width, &img_hight);
+	data->graph->empty = mlx_xpm_file_to_image(data->mlx,
+			EMPTY, &img_width, &img_hight);
+	data->graph->exit = mlx_xpm_file_to_image(data->mlx,
+			EXIT, &img_width, &img_hight);
+	data->graph->collect = mlx_xpm_file_to_image(data->mlx,
+			COLLECT, &img_width, &img_hight);
+	data->graph->winner = mlx_xpm_file_to_image(data->mlx,
+			WIN, &img_width, &img_hight);
+}
+
+void	ft_check(t_map *data)
+{
+	ft_check_wall(data);
+	ft_check_format(data);
+	ft_check_char(data);
+	ft_char_set(data);
+}
+
 int main(int argc, char *argv[])
 {
 	t_map *grid;
@@ -254,8 +305,8 @@ int main(int argc, char *argv[])
 	free_map(grid, 0);
 	///////////////////////////////////////////////////////////////////////////////
 
-	t_init_map	data;
-	
+	t_map	data;
+
 	data.mlx = mlx_init();
 	ft_map_data(&data, argv[1]);
 	ft_map_hight(&data);

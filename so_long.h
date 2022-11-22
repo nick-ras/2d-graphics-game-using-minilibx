@@ -12,13 +12,13 @@
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
-# include <fcntl.h>
 # include "libftprintf/ft_printf.h"
 # include "gnl/get_next_line.h"
 # include "/usr/local/include/mlx.h"
 # include <X11/Xfuncproto.h>
 # include <X11/extensions/shm.h>
 # include <X11/Xlib.h>
+# include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
@@ -38,20 +38,6 @@
 # define S 1
 # define D 2
 
-typedef struct s_map
-{
-	int rows;
-	int columns;
-	int S[2];
-	int D[2];
-	int collectibles;
-	int S_count;
-	int D_count;
-	int door_check_recursive; //not used, delete
-	char **map;
-	char **map2;
-} t_map;
-
 typedef struct s_graph
 {
 	void	*wall;
@@ -62,8 +48,18 @@ typedef struct s_graph
 	void	*winner;
 }	t_graph;
 
-typedef struct s_init_map
+typedef struct s_map
 {
+	int rows;
+	int columns;
+	int Start[2];
+	int Door[2];
+	int collectibles;
+	int S_count;
+	int D_count;
+	int door_check_recursive; //not used, delete
+	char **map;
+	char **map2;
 	int		hight;
 	int		lenght;
 	int		x;
@@ -72,14 +68,12 @@ typedef struct s_init_map
 	int		escape;
 	int		count;
 	int		step;
-	char	**map;
 	void	*wall;
 	void	*mlx;
 	void	*win;
 	char	*fn;
 	t_graph	*graph;
-
-}	t_init_map;
+} t_map;
 
 
 void	init_grid(t_map *grid);
@@ -93,4 +87,20 @@ void	make_grid(t_map *grid, char *argv);
 void map_name_check(char *map);
 void before_recursion(t_map *grid);
 int main(int argc, char *argv[]);
+
+
+void	ft_read_map(t_map *data);
+void	ft_map_hight(t_map *data);
+void	ft_map_data(t_map *data, char *name);
+void	ft_parse_map(t_map *render);
+int		ft_frame(t_map *data);
+void	ft_create_map(t_map *data);
+int		ft_exit(t_map *data);
+int		press_key(int keycode, t_map *data);
+
+void	ft_char_set(t_map *data);
+void	ft_check_char(t_map *data);
+void	ft_check_format(t_map *data);
+void	ft_check_wall(t_map *data);
+void	ft_game_result(t_map *data);
 #endif
