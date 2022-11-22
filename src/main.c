@@ -252,5 +252,77 @@ int main(int argc, char *argv[])
 	map_name_check(argv[1]);
 	grid = get_map_using_gnl(argv[1]);
 	free_map(grid, 0);
-	return 0;
+	///////////////////////////////////////////////////////////////////////////////
+
+	t_init_map	data;
+	
+	data.mlx = mlx_init();
+	ft_map_data(&data, argv[1]);
+	ft_map_hight(&data);
+	ft_read_map(&data);
+	ft_check(&data);
+	data.win = mlx_new_window(data.mlx, data.lenght * 40,
+			data.hight * 40, "so_long");
+	mlx_hook(data.win, 17, 0, ft_exit, &data);
+	mlx_hook(data.win, 02, 0, press_key, &data);
+	mlx_loop_hook(data.mlx, ft_frame, &data);
+	mlx_loop(data.mlx);
+
+	return (0);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+	// Display *display;
+	// Window window;
+	// XEvent event;
+	// char *msg = "Hello, Worlds!!!";
+	// int screen;
+
+	// // open connection to the server
+	// display = XOpenDisplay(NULL);
+	// if (display == NULL)
+	// {
+	// 		ft_printf("Cannot open display\n %s\n", stderr);
+	// 		exit(1);
+	// }
+
+	// screen = DefaultScreen(display);
+
+	// // create window
+	// window = XCreateSimpleWindow(display, RootWindow(display, screen), 100, 100, 500, 300, 1,
+	// 															WhitePixel(display, screen), WhitePixel(display, screen));
+
+	// // select kind of events we are interested in
+	// XSelectInput(display, window, ExposureMask | KeyPressMask);
+
+	// // map (show) the window
+	// XMapWindow(display, window);
+
+	// // event loop
+	// while (1)
+	// {
+	// 		XNextEvent(display, &event);
+
+	// 		// // draw or redraw the window
+	// 		if (event.type == Expose)
+	// 		{
+	// 				XFillRectangle(display, window, DefaultGC(display, screen), 40, 	40, 110, 110);
+	// 				XDrawString(display, window, DefaultGC(display, screen), 50, 50, msg, strlen(msg));
+	// 		}
+	// 		// // exit on key press
+	// 		if (event.type == KeyPress)
+	// 				break;
+	// }
+
+	// // close connection to the server
+	// XCloseDisplay(display);
