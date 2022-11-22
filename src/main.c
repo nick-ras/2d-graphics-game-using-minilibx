@@ -20,7 +20,7 @@ void start(t_map *grid, int row_count, int col_count)
 		if (grid->S_count != 0)
 		{
 			ft_printf("too many entrances\n");
-			exit (1);
+			free_map(grid, 1);
 		}
 		grid->S[0] = row_count;
 		grid->S[1] = col_count;
@@ -35,7 +35,7 @@ void door(t_map *grid, int row_count, int col_count)
 		if (grid->D_count != 0)
 		{
 			ft_printf("too many doors\n");
-			exit(1);
+			free_map(grid, 1);
 		}
 		grid->D[0] = row_count;
 		grid->D[1] = col_count;
@@ -52,11 +52,11 @@ void collectibles(t_map *grid, int row_count, int col_count)
 
 int	dfs(t_map *grid, int count_row, int count_col, int door)
 {
-	//ft_printf("row %d col %d and inside: %c\n", count_row, count_col, grid->map2[count_row][count_col]);
+	ft_printf("row %d col %d and inside: %s\n", count_row, count_col, grid->map2[count_row]);
 	if (count_row < 0 || count_row >= grid->rows || count_col < 0 || count_col >= grid->columns)
 	{
 		ft_printf("missing barrier\n");
-		exit (1);
+		free_map(grid, 1);
 	}
 	if (grid->map2[count_row][count_col] == '1')
 		return door;
@@ -70,17 +70,25 @@ int	dfs(t_map *grid, int count_row, int count_col, int door)
 	return door;
 }
 
-void free_map(char **map, int rows)
+void free_map(t_map *grid, int exit_func)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while (i < rows)
+	while (i < grid->rows) //valgrind apporved?
 	{
-		free(map[i]);
+		free(grid->map[i]);
+		free(grid->map2[i]);
 		i++;
 	}
-	free(map);
+	free(grid->map);
+	free(grid->map2);
+	free(grid);
+	if (exit_func)
+	{
+		ft_printf("exits program with error\n");
+		exit (1);
+	}
 }
 
 void check_map(t_map *grid)
@@ -105,55 +113,75 @@ void check_map(t_map *grid)
 	if (grid->D_count < 1 || grid->S_count < 1 || grid->collectibles < 1)
 	{
 		ft_printf("missing smth. Start: = %d, door: %d, collectible: %d\n", grid->S_count, grid->D_count, grid->collectibles);
-		exit (1);
+		free_map(grid, 1);
 	}
-	int door = 0;
+}
+
+void before_recursion(t_map *grid)
+{
+	int door;
+
+	door = 0;
 	door = dfs(grid, grid->S[0], grid->S[1], door);
 	ft_printf("\ndoor check after %d\n", door);
 	if (door < 0)
 	{
 		ft_printf("missing barrier(s)%d\n", grid->door_check_recursive);
-		exit (1);
+		free_map(grid, 1);
 	}
 	if (door < 1)
 	{
 		ft_printf("player cant go to exit, doors%d\n", grid->door_check_recursive);
-		exit (1);
+		free_map(grid, 1);
 	}
-	free_map(grid->map2, grid->rows);
 }
 
-t_map *make_grid(t_map *grid, char *argv)
+void	make_grid2(t_map *grid, char *argv)
 {
-	int row_count = 0;
+	int row_count;
 	int	fd;
 
 	fd = open(argv, O_RDONLY);
 	if (fd < 0)
 	{
 		ft_printf("fd error\n");
-		exit (1);
+		free_map(grid, 1);
 	}
-	grid->map = ft_calloc(grid->rows + 1, sizeof(char));
-	while (row_count < grid->rows)
-	{
-		grid->map[row_count] = ft_calloc(grid->columns, sizeof(char));
-		grid->map[row_count] = get_next_line(fd);
-		row_count++;
-	}
-	close(fd);
-	row_count = 0;
-	fd = open(argv, O_RDONLY);
 	grid->map2 = ft_calloc(grid->rows, sizeof(char));
+	row_count = 0;
 	while (row_count < grid->rows)
 	{
-		grid->map2[row_count] = ft_calloc(grid->columns, sizeof(char));
+		grid->map2[row_count] = ft_calloc(grid->columns + 1, sizeof(char));
 		grid->map2[row_count] = get_next_line(fd);
+		grid->map2[row_count][grid->columns] = '\0';
+		// ft_printf("map1 %s\n", grid->map2[row_count]);
 		row_count++;
 	}
 	close(fd);
-	ft_printf("\nrows %d col %d\n", grid->rows, grid->columns);
-	return grid;
+}
+
+void make_grid(t_map *grid, char *argv)
+{
+	int row_count;
+	int	fd;
+
+	fd = open(argv, O_RDONLY);
+	if (fd < 0)
+	{
+		ft_printf("fd error\n");
+		free_map(grid, 1);
+	}
+	grid->map = ft_calloc(grid->rows, sizeof(char));
+	row_count = 0;
+	while (row_count < grid->rows)
+	{
+		grid->map[row_count] = ft_calloc(grid->columns + 1, sizeof(char));
+		grid->map[row_count] = get_next_line(fd);
+		// ft_printf("map1 %s", grid->map[row_count]);
+		row_count++;
+	}
+	close(fd);
+	make_grid2(grid, argv);
 }
 
 t_map *get_map_using_gnl(char *argv)
@@ -163,14 +191,13 @@ t_map *get_map_using_gnl(char *argv)
 	char *line_as_str;
 
 	fd = open(argv, O_RDONLY);
-	ft_printf("%d", fd);
 	if (fd < 0)
 	{
 		ft_printf("fd error from first open\n");
 		exit (1);
 	}
-	line_as_str = get_next_line(fd);
 	grid = ft_calloc(1, sizeof *grid);
+	line_as_str = get_next_line(fd);
 	grid->columns = ft_strlen(line_as_str) - 1;
 	while(line_as_str)
 	{
@@ -186,7 +213,7 @@ t_map *get_map_using_gnl(char *argv)
 		ft_printf("not enough rows or columns or not a rectangle");
 		exit (1);
 	}
-	grid = make_grid(grid, argv);
+	make_grid(grid, argv);
 	check_map(grid);
 	return (grid);
 }
@@ -224,7 +251,6 @@ int main(int argc, char *argv[])
 	}
 	map_name_check(argv[1]);
 	grid = get_map_using_gnl(argv[1]);
-	free_map(grid->map, grid->rows);
-	free(grid);
+	free_map(grid, 0);
 	return 0;
 }

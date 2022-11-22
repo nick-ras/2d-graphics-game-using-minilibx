@@ -43,10 +43,10 @@ void start(t_map *grid, int row_count, int col_count);
 void door(t_map *grid, int row_count, int col_count);
 void collectibles(t_map *grid, int row_count, int col_count);
 int	dfs(t_map *grid, int count_row, int count_col, int door);
-void free_map(char **map, int rows);
+void free_map(t_map *map, int exit_func);
 void check_map(t_map *grid);
-t_map *make_grid(t_map *grid, char *argv);
-t_map *get_map_using_gnl(char *argv);
+void	make_grid(t_map *grid, char *argv);
 void map_name_check(char *map);
+void before_recursion(t_map *grid);
 int main(int argc, char *argv[]);
 #endif
