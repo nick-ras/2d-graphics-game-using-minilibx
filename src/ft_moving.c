@@ -6,7 +6,7 @@
 /*   By: nickras <nickras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:11:02 by lshonta           #+#    #+#             */
-/*   Updated: 2022/11/23 10:58:02 by nickras          ###   ########.fr       */
+/*   Updated: 2022/11/23 15:08:13 by nickras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +108,11 @@ void	move_d(t_map *data)
 	}
 }
 
-int	press_key(int keycode, t_map *data)
+int	key_press(int keycode, t_map *data)
 {
 	if (keycode == ESC)
 	{
-		mlx_destroy_window(data->mlx, data->win_ptr);
+		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 		free_map(data, 0);
 	}
 	else if (keycode == W)

@@ -15,7 +15,6 @@ void	init_grid(t_map *grid)
 	grid->count = 0;
 	grid->step = 0;
 	grid->player = 0;
-	ft_parse_map(grid);
 }
 
 void start(t_map *grid, int row_count, int col_count)
@@ -161,18 +160,21 @@ int row_count;
 	while (row_count < grid->rows)
 	{
 		grid->map2[row_count] = get_next_line(fd2);
+		if (grid->map2[row_count] == NULL)
+		{
+		ft_printf("rows is NULL\n");
+		free_map(grid, 1);
+		}	
 		grid->map[row_count][grid->columns - 1] = '\0';
-		ft_printf("map2 %s\n", grid->map2[row_count]);
-		ft_printf("map1 again %s\n", grid->map[row_count]);
 		row_count++;
 	}
-	row_count = 0;
-	while (row_count < grid->rows)
-	{
-		ft_printf("TEST map2 %s\n", grid->map2[row_count]);
-		ft_printf("TEST map1 again %s\n", grid->map[row_count]);
-		row_count++;
-	}
+	// row_count = 0;
+	// while (row_count < grid->rows)
+	// {
+	// 	ft_printf("TEST map2 %s", grid->map2[row_count]);
+	// 	ft_printf("TEST map1 again %s\n", grid->map[row_count]);
+	// 	row_count++;
+	// }
 	close(fd2);
 }
 
@@ -188,13 +190,11 @@ void make_grid(t_map *grid, char *argv)
 		free_map(grid, 1);
 	}
 	grid->map = ft_calloc(grid->rows + 1, sizeof(char *));
-	grid->map2[grid->rows] = NULL;
 	row_count = 0;
 	while (row_count < grid->rows)
 	{
 		grid->map[row_count] = get_next_line(fd);
 		grid->map[row_count][grid->columns - 1] = '\0';
-		ft_printf("map1 %s\n", grid->map[row_count]);
 		row_count++;
 	}
 	close(fd);
@@ -218,22 +218,21 @@ void check_rows(t_map *grid, char *line_as_str, int fd)
 	while(line_as_str)
 	{
 	 	ft_printf("%s\n", line_as_str);
+	if ((int)ft_strlen(line_as_str) != grid->columns - 1)
+	{
+		ft_printf("lines not same length\n");
+		free_map(grid, 1);
+	}
 		free(line_as_str);
 		line_as_str = get_next_line(fd);
-		line_as_str[grid->columns - 1] = '\0';
-		if (!line_as_str)
-		{
-			ft_printf("didnt read line properly\n");
-			free_map(grid, 1);
-		}
+		if (line_as_str != NULL)
+			line_as_str[grid->columns - 1] = '\0';
 		grid->rows++;
 	}
-	if (line_as_str)
-		free(line_as_str);
 	close(fd);
 }
 
-t_map *get_map_using_gnl(char *argv)
+t_map *allocate_and_check(char *argv)
 {
 	t_map *grid;
 	int fd;
@@ -243,13 +242,8 @@ t_map *get_map_using_gnl(char *argv)
 	grid = ft_calloc(1, sizeof *grid);
 	line_as_str = get_next_line(fd);
 	grid->columns = ft_strlen(line_as_str);
-	if ((int)ft_strlen(line_as_str) != grid->columns)
-	{
-		ft_printf("lines not same length\n");
-		free_map(grid, 1);
-	}
 	line_as_str[grid->columns - 1] = '\0';
-	check_rows(grid, line_as_str, fd);
+	check_rows(grid, line_as_str, fd); //can delete
 	if (grid->rows < 4 || grid->columns < 4 || grid->rows == grid->columns)
 	{
 		ft_printf("not enough rows or columns or not a rectangle");
@@ -286,31 +280,33 @@ void map_name_check(char *map)
 
 int	frame_program(t_map *grid)
 {
-	mlx_clear_window(grid->mlx, grid->win_ptr);
+	mlx_clear_window(grid->mlx_ptr, grid->win_ptr);
 	ft_create_map(grid);
 	if (grid->count == 0 && grid->player == 1 && grid->escape == 1)
 		result(grid);
 	return (0);
 }
 
-void	ft_parse_map(t_map *grid)
+void	parse_map(t_map *grid)
 {
-	int	img_hight;
+	int	img_height;
 	int	img_width;
 
 	grid->graph = malloc(sizeof(t_graph));
-	grid->graph->player = mlx_xpm_file_to_image(grid->mlx,
-			PLAYER, &img_width, &img_hight);
-	grid->graph->wall = mlx_xpm_file_to_image(grid->mlx,
-			WALL, &img_width, &img_hight);
-	grid->graph->empty = mlx_xpm_file_to_image(grid->mlx,
-			EMPTY, &img_width, &img_hight);
-	grid->graph->door = mlx_xpm_file_to_image(grid->mlx,
-			EXIT, &img_width, &img_hight);
-	grid->graph->collectible = mlx_xpm_file_to_image(grid->mlx,
-			COLLECT, &img_width, &img_hight);
-	grid->graph->winner = mlx_xpm_file_to_image(grid->mlx,
-			WIN, &img_width, &img_hight);
+	ft_printf("argc not 2\n");
+	grid->graph->player = mlx_xpm_file_to_image(grid->mlx_ptr,
+			PLAYER, &img_width, &img_height);
+	ft_printf("argc not 2\n");
+	grid->graph->wall = mlx_xpm_file_to_image(grid->mlx_ptr,
+			WALL, &img_width, &img_height);
+	grid->graph->empty = mlx_xpm_file_to_image(grid->mlx_ptr,
+			EMPTY, &img_width, &img_height);
+	grid->graph->door = mlx_xpm_file_to_image(grid->mlx_ptr,
+			EXIT, &img_width, &img_height);
+	grid->graph->collectible = mlx_xpm_file_to_image(grid->mlx_ptr,
+			COLLECT, &img_width, &img_height);
+	grid->graph->winner = mlx_xpm_file_to_image(grid->mlx_ptr,
+			WIN, &img_width, &img_height);
 }
 
 int main(int argc, char *argv[])
@@ -323,18 +319,19 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 	map_name_check(argv[1]);
-	grid = get_map_using_gnl(argv[1]);
+	grid = allocate_and_check(argv[1]);
+	parse_map(grid);
 	grid->filename = *argv;
 	ft_printf("name(name) %s\n", grid->filename);
-	grid->mlx = mlx_init();
-	if (grid->mlx == NULL)
+	grid->mlx_ptr = mlx_init();
+	if (grid->mlx_ptr == NULL)
 	{
-		free(grid->mlx);
+		free(grid->mlx_ptr);
 		ft_printf("mlx_init err\n");
 		free_map(grid, 1);
 	}
 	////////////////////////////////////////////////////////////////////////////////
-	grid->win_ptr = mlx_new_window(grid->mlx, grid->columns * 60, \
+	grid->win_ptr = mlx_new_window(grid->mlx_ptr, grid->columns * 60, \
 	grid->rows * 60, "My window");
 		if (grid->win_ptr == NULL)
 	{
@@ -342,21 +339,17 @@ int main(int argc, char *argv[])
 		ft_printf("grid->win_ptr error\n");
 		free_map(grid, 1);
 	}
+	mlx_loop_hook(grid->mlx_ptr, &no_event, &grid);
+	mlx_key_hook(grid->win_ptr, key_press, &grid);
+	//mlx_hook(grid->win_ptr, KeyRelease, KeyReleaseMask, &handle_keyrelease, &grid); /* CHANGED */
 
-	mlx_loop_hook(grid->mlx, &no_event, &grid);
-	mlx_key_hook(grid->win_ptr, press_key, &grid);
-
-	mlx_loop(grid->mlx);
+	mlx_loop(grid->mlx_ptr);
 
 	/* we will exit the loop if there's no window left, and execute this code */
-	mlx_destroy_display(grid->mlx);
-	free(grid->mlx);
+	mlx_destroy_display(grid->mlx_ptr);
+	free(grid->mlx_ptr);
 
 
-	// mlx_hook(grid->win_ptr, 17, 0, free_map, &grid);
-	// mlx_hook(grid->win_ptr, 02, 0, press_key, &grid);
-	// mlx_loop_hook(grid->mlx, frame_program, grid);
-	// mlx_loop(grid->mlx);
 
 	free_map(grid, 0);
 	return (0);

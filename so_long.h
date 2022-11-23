@@ -6,7 +6,7 @@
 /*   By: nickras <nickras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 09:49:19 by nickras           #+#    #+#             */
-/*   Updated: 2022/11/23 11:02:57 by nickras          ###   ########.fr       */
+/*   Updated: 2022/11/23 16:16:55 by nickras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <X11/Xfuncproto.h>
 # include <X11/extensions/shm.h>
 # include <X11/Xlib.h>
+# include <X11/keysym.h>
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -65,7 +66,7 @@ typedef struct s_map
 	int		count;
 	int		step;
 	void	*wall;
-	void	*mlx;
+	void	*mlx_ptr;
 	void	*win_ptr;
 	char	*filename;
 	t_graph	*graph;
@@ -85,15 +86,16 @@ void	make_grid(t_map *grid, char *argv);
 void map_name_check(char *map);
 void before_recursion(t_map *grid);
 int main(int argc, char *argv[]);
+t_map *allocate_and_check(char *argv);
 
 int	handler_input_loop(int keysym, t_map *data);
 int	no_event(void *data);
 
-void	ft_parse_map(t_map *render);
+void	parse_map(t_map *render);
 int		frame_program(t_map *data);
 void	ft_create_map(t_map *data);
 int		exit_program(t_map *data);
-int		press_key(int keycode, t_map *data);
+int		key_press(int keycode, t_map *data);
 void	char_check(t_map *data);
 void	wall_check(t_map *data);
 void	result(t_map *data);
