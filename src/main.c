@@ -327,13 +327,36 @@ int main(int argc, char *argv[])
 	grid->filename = *argv;
 	ft_printf("name(name) %s\n", grid->filename);
 	grid->mlx = mlx_init();
+	if (grid->mlx == NULL)
+	{
+		free(grid->mlx);
+		ft_printf("mlx_init err\n");
+		free_map(grid, 1);
+	}
 	////////////////////////////////////////////////////////////////////////////////
-	grid->win_ptr = mlx_new_window(grid->mlx, grid->columns * 60,
-			grid->rows * 60, "so_long_picture");
-	mlx_hook(grid->win_ptr, 17, 0, free_map, &grid);
-	mlx_hook(grid->win_ptr, 02, 0, press_key, &grid);
-	mlx_loop_hook(grid->mlx, frame_program, grid);
+	grid->win_ptr = mlx_new_window(grid->mlx, grid->columns * 60, \
+	grid->rows * 60, "My window");
+		if (grid->win_ptr == NULL)
+	{
+		free(grid->win_ptr);
+		ft_printf("grid->win_ptr error\n");
+		free_map(grid, 1);
+	}
+
+	mlx_loop_hook(grid->mlx, &no_event, &grid);
+	mlx_key_hook(grid->win_ptr, press_key, &grid);
+
 	mlx_loop(grid->mlx);
+
+	/* we will exit the loop if there's no window left, and execute this code */
+	mlx_destroy_display(grid->mlx);
+	free(grid->mlx);
+
+
+	// mlx_hook(grid->win_ptr, 17, 0, free_map, &grid);
+	// mlx_hook(grid->win_ptr, 02, 0, press_key, &grid);
+	// mlx_loop_hook(grid->mlx, frame_program, grid);
+	// mlx_loop(grid->mlx);
 
 	free_map(grid, 0);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: nickras <nickras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 09:49:19 by nickras           #+#    #+#             */
-/*   Updated: 2022/11/23 09:58:53 by nickras          ###   ########.fr       */
+/*   Updated: 2022/11/23 11:02:57 by nickras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
-# include <unistd.h> //del?
-# include <memory.h> //del?
-# define WIDTH 256
-# define HEIGHT 256
+# include <unistd.h>
+# include <memory.h>
 # define WALL "./pictures/wall.xpm"
 # define EMPTY "./pictures/space.xpm"
 # define PLAYER "./pictures/player.xpm"
@@ -88,6 +86,8 @@ void map_name_check(char *map);
 void before_recursion(t_map *grid);
 int main(int argc, char *argv[]);
 
+int	handler_input_loop(int keysym, t_map *data);
+int	no_event(void *data);
 
 void	ft_parse_map(t_map *render);
 int		frame_program(t_map *data);
