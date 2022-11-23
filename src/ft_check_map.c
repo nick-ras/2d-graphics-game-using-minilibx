@@ -125,7 +125,7 @@ void	ft_char_set(t_map *data)
 
 void	ft_game_result(t_map *data)
 {
-	mlx_clear_window(data->mlx, data->win);
-	mlx_put_image_to_window(data->mlx, data->win, data->graph->winner,
+	mlx_clear_window(data->mlx, data->win_ptr);
+	mlx_put_image_to_window(data->mlx, data->win_ptr, data->graph->winner,
 		data->lenght * 40 / 2.4, data->hight * 40 / 4);
 }

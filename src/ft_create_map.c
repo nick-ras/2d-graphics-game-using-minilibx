@@ -20,7 +20,7 @@ int	ft_exit(t_map *data)
 
 void	put_player_img(t_map *data, int *j, int *i)
 {
-	mlx_put_image_to_window(data->mlx, data->win,
+	mlx_put_image_to_window(data->mlx, data->win_ptr,
 		data->graph->player, (*j) * 40, (*i) * 40);
 	data->y = *i;
 	data->x = *j;
@@ -28,13 +28,13 @@ void	put_player_img(t_map *data, int *j, int *i)
 
 void	put_wall_img(t_map *data, int *j, int *i)
 {
-	mlx_put_image_to_window(data->mlx, data->win,
+	mlx_put_image_to_window(data->mlx, data->win_ptr,
 		data->graph->wall, (*j) * 40, (*i) * 40);
 }
 
 void	put_empty_img(t_map *data, int *j, int *i)
 {
-	mlx_put_image_to_window(data->mlx, data->win,
+	mlx_put_image_to_window(data->mlx, data->win_ptr,
 		data->graph->empty, (*j) * 40, (*i) * 40);
 }
 
@@ -56,10 +56,10 @@ void	ft_create_map(t_map *data)
 			else if (data->map[i][j] == 'P')
 				put_player_img(data, &j, &i);
 			else if (data->map[i][j] == 'E')
-				mlx_put_image_to_window(data->mlx, data->win,
+				mlx_put_image_to_window(data->mlx, data->win_ptr,
 					data->graph->door, j * 40, i * 40);
 			else if (data->map[i][j] == 'C')
-				mlx_put_image_to_window(data->mlx, data->win,
+				mlx_put_image_to_window(data->mlx, data->win_ptr,
 					data->graph->collectible, j * 40, i * 40);
 			j++;
 		}

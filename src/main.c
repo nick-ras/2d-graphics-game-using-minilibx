@@ -261,13 +261,9 @@ void map_name_check(char *map)
 
 void	ft_map_data(t_map *grid, char *name)
 {
-	grid->hight = 0;
-	grid->lenght = 0;
 	grid->escape = 0;
 	grid->count = 0;
 	grid->step = 0;
-	grid->x = 0;
-	grid->y = 0;
 	grid->player = 0;
 	grid->fn = name;
 	ft_parse_map(grid);
@@ -275,7 +271,7 @@ void	ft_map_data(t_map *grid, char *name)
 
 int	ft_frame(t_map *grid)
 {
-	mlx_clear_window(grid->mlx, grid->win);
+	mlx_clear_window(grid->mlx, grid->win_ptr);
 	ft_create_map(grid);
 	if (grid->count == 0 && grid->player == 1 && grid->escape == 1)
 		ft_game_result(grid);
@@ -326,14 +322,14 @@ int main(int argc, char *argv[])
 	///////////////////////////////////////////////////////////////////////////////
 
 	grid->mlx = mlx_init();
-	ft_map_data(grid, argv[1]);
+	ft_map_data(grid, argv[1]); // sets structs
 	ft_map_hight(grid); //redundant just checks map
 	ft_read_map(grid); //REDUNTANT, just reads map into array
 	ft_check(grid);
-	grid->win = mlx_new_window(grid->mlx, grid->lenght * 40,
-			grid->hight * 40, "so_long");
-	mlx_hook(grid->win, 17, 0, ft_exit, &grid);
-	mlx_hook(grid->win, 02, 0, press_key, &grid);
+	grid->win_ptr = mlx_new_window(grid->mlx, grid->columns * 40,
+			grid->rows * 40, "so_long_picture");
+	mlx_hook(grid->win_ptr, 17, 0, ft_exit, &grid);
+	mlx_hook(grid->win_ptr, 02, 0, press_key, &grid);
 	mlx_loop_hook(grid->mlx, ft_frame, &grid);
 	mlx_loop(grid->mlx);
 
