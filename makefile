@@ -6,7 +6,7 @@
 #    By: nickras <nickras@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 10:21:39 by nickras           #+#    #+#              #
-#    Updated: 2022/09/12 10:34:40 by nickras          ###   ########.fr        #
+#    Updated: 2022/11/23 09:58:49 by nickras          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ OBJ_DIR =   ./obj/
 
 
 SRC_FILES = main.c ../gnl/get_next_line_utils.c ../gnl/get_next_line.c \
-../gnl/get_next_line.h ../libftprintf/libftprintf.a ft_read_map.c ft_create_map.c \
+../gnl/get_next_line.h ../libftprintf/libftprintf.a ft_create_map.c \
 ft_moving.c ft_check_map.c
 # so_long.c \
 # 		./src/map_render.c \

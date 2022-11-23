@@ -1,5 +1,5 @@
 #include "../so_long.h"
-//gcc src/main.c libftprintf/libftprintf.a gnl/get_next_line.c gnl/get_next_line_utils.c && ./a.out src/map.ber
+//make re  && ./a.out src/map.ber
 void	init_grid(t_map *grid)
 {
 	grid->S_count = 0;
@@ -75,7 +75,7 @@ int	dfs(t_map *grid, int count_row, int count_col, int door)
 	return door;
 }
 
-void free_map(t_map *grid, int exit_func)
+int free_map(t_map *grid, int exit_func)
 {
 	int	i;
 
@@ -94,8 +94,9 @@ void free_map(t_map *grid, int exit_func)
 	if (exit_func)
 	{
 		ft_printf("exits program with error\n");
-		exit (1);
+		exit(EXIT_FAILURE);
 	}
+	exit(EXIT_SUCCESS);
 }
 
 void check_map(t_map *grid)
@@ -200,11 +201,9 @@ void make_grid(t_map *grid, char *argv)
 	make_grid2(grid, argv);
 }
 
-t_map *get_map_using_gnl(char *argv)
+int get_fd(char *argv)
 {
-	t_map *grid;
 	int fd;
-	char *line_as_str;
 
 	fd = open(argv, O_RDONLY);
 	if (fd < 0)
@@ -212,6 +211,35 @@ t_map *get_map_using_gnl(char *argv)
 		ft_printf("fd error from first open\n");
 		exit (1);
 	}
+	return (fd);
+}
+void check_rows(t_map *grid, char *line_as_str, int fd)
+{
+	while(line_as_str)
+	{
+	 	ft_printf("%s\n", line_as_str);
+		free(line_as_str);
+		line_as_str = get_next_line(fd);
+		line_as_str[grid->columns - 1] = '\0';
+		if (!line_as_str)
+		{
+			ft_printf("didnt read line properly\n");
+			free_map(grid, 1);
+		}
+		grid->rows++;
+	}
+	if (line_as_str)
+		free(line_as_str);
+	close(fd);
+}
+
+t_map *get_map_using_gnl(char *argv)
+{
+	t_map *grid;
+	int fd;
+	char *line_as_str;
+
+	fd = get_fd(argv);
 	grid = ft_calloc(1, sizeof *grid);
 	line_as_str = get_next_line(fd);
 	grid->columns = ft_strlen(line_as_str);
@@ -221,18 +249,7 @@ t_map *get_map_using_gnl(char *argv)
 		free_map(grid, 1);
 	}
 	line_as_str[grid->columns - 1] = '\0';
-	while(line_as_str)
-	{
-	 	ft_printf("%s\n", line_as_str);
-		free(line_as_str);
-		line_as_str = get_next_line(fd);
-		if (line_as_str)
-			line_as_str[grid->columns - 1] = '\0';
-		grid->rows++;
-	}
-	if (line_as_str)
-		free(line_as_str);
-	close(fd);
+	check_rows(grid, line_as_str, fd);
 	if (grid->rows < 4 || grid->columns < 4 || grid->rows == grid->columns)
 	{
 		ft_printf("not enough rows or columns or not a rectangle");
@@ -240,6 +257,8 @@ t_map *get_map_using_gnl(char *argv)
 	}
 	make_grid(grid, argv);
 	check_map(grid);
+	wall_check(grid);
+	char_check(grid);
 	return (grid);
 }
 
@@ -265,17 +284,12 @@ void map_name_check(char *map)
 	}
 }
 
-void	ft_map_data(t_map *grid, char *name)
-{
-	
-}
-
-int	ft_frame(t_map *grid)
+int	frame_program(t_map *grid)
 {
 	mlx_clear_window(grid->mlx, grid->win_ptr);
 	ft_create_map(grid);
 	if (grid->count == 0 && grid->player == 1 && grid->escape == 1)
-		ft_game_result(grid);
+		result(grid);
 	return (0);
 }
 
@@ -299,14 +313,6 @@ void	ft_parse_map(t_map *grid)
 			WIN, &img_width, &img_hight);
 }
 
-void	ft_check(t_map *grid)
-{
-	ft_check_wall(grid);
-	//ft_check_format(grid); // redunant checking if name correct
-	ft_check_char(grid); // checks if right chars
-	//ft_char_set(grid); //redunant, already did
-}
-
 int main(int argc, char *argv[])
 {
 	t_map *grid;
@@ -316,19 +322,17 @@ int main(int argc, char *argv[])
 		ft_printf("argc not 2\n");
 		return 1;
 	}
-	grid->fn = argv;
 	map_name_check(argv[1]);
 	grid = get_map_using_gnl(argv[1]);
+	grid->filename = *argv;
+	ft_printf("name(name) %s\n", grid->filename);
 	grid->mlx = mlx_init();
-	///////////////////////////////////////////////////////////////////////////////
-	ft_map_hight(grid); //redundant just checks map
-	ft_read_map(grid); //REDUNTANT, just reads map into array
-	ft_check(grid);
-	grid->win_ptr = mlx_new_window(grid->mlx, grid->columns * 40,
-			grid->rows * 40, "so_long_picture");
-	mlx_hook(grid->win_ptr, 17, 0, ft_exit, &grid);
+	////////////////////////////////////////////////////////////////////////////////
+	grid->win_ptr = mlx_new_window(grid->mlx, grid->columns * 60,
+			grid->rows * 60, "so_long_picture");
+	mlx_hook(grid->win_ptr, 17, 0, free_map, &grid);
 	mlx_hook(grid->win_ptr, 02, 0, press_key, &grid);
-	mlx_loop_hook(grid->mlx, ft_frame, &grid);
+	mlx_loop_hook(grid->mlx, frame_program, grid);
 	mlx_loop(grid->mlx);
 
 	free_map(grid, 0);

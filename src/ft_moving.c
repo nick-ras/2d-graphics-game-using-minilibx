@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_moving.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lshonta <lshonta@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nickras <nickras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:11:02 by lshonta           #+#    #+#             */
-/*   Updated: 2021/12/14 20:03:57 by lshonta          ###   ########.fr       */
+/*   Updated: 2022/11/23 10:33:49 by nickras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	move_w(t_map *data)
 			data->escape = 1;
 		data->y--;
 		data->step++;
-		printf("Steps: %d\n", data->step);
+		ft_printf("Steps: %d\n", data->step);
 	}
 }
 
@@ -56,7 +56,7 @@ void	move_s(t_map *data)
 			data->escape = 1;
 		data->y++;
 		data->step++;
-		printf("Steps: %d\n", data->step);
+		ft_printf("Steps: %d\n", data->step);
 	}
 }
 
@@ -80,7 +80,7 @@ void	move_a(t_map *data)
 			data->escape = 1;
 		data->x--;
 		data->step++;
-		printf("Steps: %d\n", data->step);
+		ft_printf("Steps: %d\n", data->step);
 	}
 }
 
@@ -104,14 +104,14 @@ void	move_d(t_map *data)
 			data->escape = 1;
 		data->x++;
 		data->step++;
-		printf("Steps: %d\n", data->step);
+		ft_printf("Steps: %d\n", data->step);
 	}
 }
 
 int	press_key(int keycode, t_map *data)
 {
 	if (keycode == ESC)
-		ft_exit(data);
+		free_map(data, 0);
 	else if (keycode == W)
 		move_w(data);
 	else if (keycode == A)
