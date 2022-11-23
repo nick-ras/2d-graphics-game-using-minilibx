@@ -6,7 +6,7 @@
 /*   By: nickras <nickras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 23:19:38 by lshonta           #+#    #+#             */
-/*   Updated: 2022/11/23 16:29:52 by nickras          ###   ########.fr       */
+/*   Updated: 2022/11/23 16:53:20 by nickras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,10 @@ void	char_check(t_map *data)
 		i = 0;
 		while (data->map[j][i])
 		{
-			ft_printf("nested loop %s\n", data->map[j][i]);
-			if (data->map[j][i] != 'S' || data->map[j][i] != 'D'
-				|| data->map[j][i] != '1' || data->map[j][i] != 'C'
-				|| data->map[j][i] != '0')
+			if (data->map[j][i] != '1' && data->map[j][i] != 'D' && data->map[j][i] != 'S'  \
+			&& data->map[j][i] != 'C' && data->map[j][i] != '0')
 			{
-				ft_printf("Error: There are invalid characters in grid");
+				ft_printf("There are invalid characters in grid\n");
 				free_map(data, 1);
 			}
 				i++;

@@ -293,10 +293,9 @@ void	parse_map(t_map *grid)
 	int	img_width;
 
 	grid->graph = malloc(sizeof(t_graph));
-	ft_printf("argc not 2\n");
 	grid->graph->player = mlx_xpm_file_to_image(grid->mlx_ptr,
 			PLAYER, &img_width, &img_height);
-	ft_printf("argc not 2\n");
+	ft_printf("after xpm file to image2\n");
 	grid->graph->wall = mlx_xpm_file_to_image(grid->mlx_ptr,
 			WALL, &img_width, &img_height);
 	grid->graph->empty = mlx_xpm_file_to_image(grid->mlx_ptr,
