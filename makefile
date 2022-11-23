@@ -25,7 +25,8 @@ OBJ_DIR =   ./obj/
 
 
 SRC_FILES = main.c ../gnl/get_next_line_utils.c ../gnl/get_next_line.c \
-../gnl/get_next_line.h ../libftprintf/libftprintf.a ft_read_map.c
+../gnl/get_next_line.h ../libftprintf/libftprintf.a ft_read_map.c ft_create_map.c \
+ft_moving.c ft_check_map.c
 # so_long.c \
 # 		./src/map_render.c \
 # 		./src/map_load.c \

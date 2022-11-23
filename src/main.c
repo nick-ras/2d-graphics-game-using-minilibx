@@ -6,10 +6,10 @@ void	init_grid(t_map *grid)
 	grid->D_count = 0;
 	grid->collectibles = 0;
 	grid->door_check_recursive = 0;
-	grid->S[0] = 0;
-	grid->S[1] = 0;
-	grid->D[0] = 0;
-	grid->D[1] = 0;
+	grid->Start[0] = 0;
+	grid->Start[1] = 0;
+	grid->Door[0] = 0;
+	grid->Door[1] = 0;
 }
 
 void start(t_map *grid, int row_count, int col_count)
@@ -21,8 +21,8 @@ void start(t_map *grid, int row_count, int col_count)
 			ft_printf("too many entrances\n");
 			free_map(grid, 1);
 		}
-		grid->S[0] = row_count;
-		grid->S[1] = col_count;
+		grid->Start[0] = row_count;
+		grid->Start[1] = col_count;
 		grid->S_count++;
 	}
 }
@@ -36,8 +36,8 @@ void door(t_map *grid, int row_count, int col_count)
 			ft_printf("too many doors\n");
 			free_map(grid, 1);
 		}
-		grid->D[0] = row_count;
-		grid->D[1] = col_count;
+		grid->Door[0] = row_count;
+		grid->Door[1] = col_count;
 		// ft_printf("door %d and %d \n", grid->D[0], grid->D[1]);
 		grid->D_count++;
 	}
@@ -123,7 +123,7 @@ void before_recursion(t_map *grid)
 	int door;
 
 	door = 0;
-	door = dfs(grid, grid->S[0], grid->S[1], door);
+	door = dfs(grid, grid->Start[0], grid->Start[1], door);
 	ft_printf("\ndoor check after %d\n", door);
 	if (door < 0)
 	{
@@ -149,6 +149,7 @@ int row_count;
 		free_map(grid, 1);
 	}
 	grid->map2 = ft_calloc(grid->rows + 1, sizeof(char *));
+	grid->map2[grid->rows] = NULL;
 	row_count = 0;
 	while (row_count < grid->rows)
 	{
@@ -180,6 +181,7 @@ void make_grid(t_map *grid, char *argv)
 		free_map(grid, 1);
 	}
 	grid->map = ft_calloc(grid->rows + 1, sizeof(char *));
+	grid->map2[grid->rows] = NULL;
 	row_count = 0;
 	while (row_count < grid->rows)
 	{
@@ -207,6 +209,11 @@ t_map *get_map_using_gnl(char *argv)
 	grid = ft_calloc(1, sizeof *grid);
 	line_as_str = get_next_line(fd);
 	grid->columns = ft_strlen(line_as_str);
+	if ((int)ft_strlen(line_as_str) != grid->columns)
+	{
+		ft_printf("lines not same length\n");
+		free_map(grid, 1);
+	}
 	line_as_str[grid->columns - 1] = '\0';
 	while(line_as_str)
 	{
@@ -228,28 +235,6 @@ t_map *get_map_using_gnl(char *argv)
 	make_grid(grid, argv);
 	check_map(grid);
 	return (grid);
-}
-
-void map_name_check(char *map)
-{
-	char	*ptr;
-	ft_printf("name %s length%d \n", map, ft_strlen(map));
-	if (ft_strnstr(map, ".ber", ft_strlen(map)) == NULL)
-	{
-		ft_printf("name not correct\n");
-		exit (1);
-	}
-	ptr = ft_memchr(map, '.', ft_strlen(map));
-	if (*(ptr + 4 ) !=  '\0')
-	{
-		ft_printf("char after '.ber'\n");
-		exit (1);
-	}
-	if (ptr ==  map)
-	{
-		ft_printf("char(s) missing before '.ber'\n");
-		exit (1);
-	}
 }
 
 void map_name_check(char *map)
@@ -320,9 +305,9 @@ void	ft_parse_map(t_map *grid)
 void	ft_check(t_map *grid)
 {
 	ft_check_wall(grid);
-	ft_check_format(grid); // redunant checking if name correct
+	//ft_check_format(grid); // redunant checking if name correct
 	ft_check_char(grid); // checks if right chars
-	ft_char_set(grid);
+	//ft_char_set(grid); //redunant, already did
 }
 
 
@@ -341,10 +326,10 @@ int main(int argc, char *argv[])
 	///////////////////////////////////////////////////////////////////////////////
 
 	grid->mlx = mlx_init();
-	ft_map_data(&grid, argv[1]);
-	ft_map_hight(&grid); //redundant just checks map
-	ft_read_map(&grid); //REDUNTANT, just reads map into array
-	ft_check(&grid);
+	ft_map_data(grid, argv[1]);
+	ft_map_hight(grid); //redundant just checks map
+	ft_read_map(grid); //REDUNTANT, just reads map into array
+	ft_check(grid);
 	grid->win = mlx_new_window(grid->mlx, grid->lenght * 40,
 			grid->hight * 40, "so_long");
 	mlx_hook(grid->win, 17, 0, ft_exit, &grid);

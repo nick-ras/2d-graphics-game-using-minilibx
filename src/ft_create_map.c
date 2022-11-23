@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 int	ft_exit(t_map *data)
 {
@@ -57,10 +57,10 @@ void	ft_create_map(t_map *data)
 				put_player_img(data, &j, &i);
 			else if (data->map[i][j] == 'E')
 				mlx_put_image_to_window(data->mlx, data->win,
-					data->graph->exit, j * 40, i * 40);
+					data->graph->door, j * 40, i * 40);
 			else if (data->map[i][j] == 'C')
 				mlx_put_image_to_window(data->mlx, data->win,
-					data->graph->collect, j * 40, i * 40);
+					data->graph->collectible, j * 40, i * 40);
 			j++;
 		}
 		j = 0, i++;
