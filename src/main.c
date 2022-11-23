@@ -75,16 +75,14 @@ void free_map(t_map *grid, int exit_func)
 	int	i;
 
 	i = 0;
-	while (i < grid->rows) //valgrind apporved?
+	while (i < grid->rows)
 	{
-		// if (grid->map[i] != NULL)
-		// 	free(grid->map[i]);
-		// if (grid->map[i] != NULL)
-		// 	free(grid->map2[i]);
+		if (grid->map[i] != NULL)
+			free(grid->map[i]);
+		if (grid->map[i] != NULL)
+			free(grid->map2[i]);
 		i++;
 	}
-	ft_printf("3--> %d\n", grid->map[3]);
-	free(grid->map[3]);
 	free(grid->map);
 	free(grid->map2);
 	free(grid);
