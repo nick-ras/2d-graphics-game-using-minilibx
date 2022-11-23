@@ -10,6 +10,12 @@ void	init_grid(t_map *grid)
 	grid->Start[1] = 0;
 	grid->Door[0] = 0;
 	grid->Door[1] = 0;
+	
+	grid->escape = 0;
+	grid->count = 0;
+	grid->step = 0;
+	grid->player = 0;
+	ft_parse_map(grid);
 }
 
 void start(t_map *grid, int row_count, int col_count)
@@ -261,12 +267,7 @@ void map_name_check(char *map)
 
 void	ft_map_data(t_map *grid, char *name)
 {
-	grid->escape = 0;
-	grid->count = 0;
-	grid->step = 0;
-	grid->player = 0;
-	grid->fn = name;
-	ft_parse_map(grid);
+	
 }
 
 int	ft_frame(t_map *grid)
@@ -306,8 +307,6 @@ void	ft_check(t_map *grid)
 	//ft_char_set(grid); //redunant, already did
 }
 
-
-
 int main(int argc, char *argv[])
 {
 	t_map *grid;
@@ -317,12 +316,11 @@ int main(int argc, char *argv[])
 		ft_printf("argc not 2\n");
 		return 1;
 	}
+	grid->fn = argv;
 	map_name_check(argv[1]);
 	grid = get_map_using_gnl(argv[1]);
-	///////////////////////////////////////////////////////////////////////////////
-
 	grid->mlx = mlx_init();
-	ft_map_data(grid, argv[1]); // sets structs
+	///////////////////////////////////////////////////////////////////////////////
 	ft_map_hight(grid); //redundant just checks map
 	ft_read_map(grid); //REDUNTANT, just reads map into array
 	ft_check(grid);

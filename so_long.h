@@ -27,10 +27,10 @@
 # define WIDTH 256
 # define HEIGHT 256
 # define WALL "./pictures/wall.xpm"
-# define EMPTY "./pictures/empty.xpm"
+# define EMPTY "./pictures/space.xpm"
 # define PLAYER "./pictures/player.xpm"
-# define EXIT "./pictures/exit.xpm"
-# define COLLECT "./pictures/collect.xpm"
+# define EXIT "./pictures/door.xpm"
+# define COLLECT "./pictures/collectible.xpm"
 # define WIN "./pictures/winner.xpm"
 # define ESC 53
 # define W 13
@@ -70,7 +70,7 @@ typedef struct s_map
 	int		step;
 	void	*wall;
 	void	*mlx;
-	void	*win;
+	void	*win_ptr;
 	char	*fn;
 	t_graph	*graph;
 } t_map;
@@ -91,7 +91,6 @@ int main(int argc, char *argv[]);
 
 void	ft_read_map(t_map *data);
 void	ft_map_hight(t_map *data);
-void	ft_map_data(t_map *data, char *name);
 void	ft_parse_map(t_map *render);
 int		ft_frame(t_map *data);
 void	ft_create_map(t_map *data);
