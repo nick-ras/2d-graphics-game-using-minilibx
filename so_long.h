@@ -42,8 +42,8 @@ typedef struct s_graph
 {
 	void	*wall;
 	void	*empty;
-	void	*collect;
-	void	*exit;
+	void	*collectible;
+	void	*door;
 	void	*player;
 	void	*winner;
 }	t_graph;

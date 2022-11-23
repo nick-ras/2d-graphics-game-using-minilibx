@@ -35,7 +35,7 @@ void	ft_check_wall(t_map *data)
 	if (err > 0)
 	{
 		printf("Error.\nCheck walls");
-		exit(EXIT_FAILURE);
+		free_map(data, 1);
 	}
 }
 
@@ -79,14 +79,14 @@ void	ft_check_char(t_map *data)
 	{
 		while (data->map[j][i])
 		{
-			if (data->map[j][i] == 'P' || data->map[j][i] == 'E'
+			if (data->map[j][i] == 'S' || data->map[j][i] == 'D'
 				|| data->map[j][i] == '1' || data->map[j][i] == 'C'
 				|| data->map[j][i] == '0')
 				i++;
 			else
 			{
 				printf("Error.\nInvalid char at map");
-				exit(EXIT_FAILURE);
+				free_map(data, 1);
 			}
 		}
 		i = 0;

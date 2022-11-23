@@ -13,16 +13,16 @@ void	ft_map_hight(t_map *data)
 		printf("File not read\n");
 		exit (EXIT_FAILURE);
 	}
-	while (line[data->lenght] != '\0')
-		data->lenght++;
+	while (line[data->columns] != '\0')
+		data->columns++;
 	while (line)
 	{
-		if ((int)ft_strlen(line) != data->lenght)
+		if ((int)ft_strlen(line) != data->columns)
 		{
 			printf("Error.Map not valide");
 			exit(EXIT_FAILURE);
 		}
-		data->hight++;
+		data->rows++;
 		free(line);
 		line = get_next_line(fd);
 	}
