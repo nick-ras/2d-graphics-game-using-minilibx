@@ -77,10 +77,14 @@ void free_map(t_map *grid, int exit_func)
 	i = 0;
 	while (i < grid->rows) //valgrind apporved?
 	{
-		free(grid->map[i]);
-		free(grid->map2[i]);
+		// if (grid->map[i] != NULL)
+		// 	free(grid->map[i]);
+		// if (grid->map[i] != NULL)
+		// 	free(grid->map2[i]);
 		i++;
 	}
+	ft_printf("3--> %d\n", grid->map[3]);
+	free(grid->map[3]);
 	free(grid->map);
 	free(grid->map2);
 	free(grid);
@@ -138,26 +142,33 @@ void before_recursion(t_map *grid)
 
 void	make_grid2(t_map *grid, char *argv)
 {
-	int row_count;
-	int	fd;
+int row_count;
+	int	fd2;
 
-	fd = open(argv, O_RDONLY);
-	if (fd < 0)
+	fd2 = open(argv, O_RDONLY);
+	if (fd2 < 0)
 	{
 		ft_printf("fd error\n");
 		free_map(grid, 1);
 	}
-	grid->map2 = ft_calloc(grid->rows, sizeof(char));
+	grid->map2 = ft_calloc(grid->rows + 1, sizeof(char *));
 	row_count = 0;
 	while (row_count < grid->rows)
 	{
-		grid->map2[row_count] = ft_calloc(grid->columns + 1, sizeof(char));
-		grid->map2[row_count] = get_next_line(fd);
-		grid->map2[row_count][grid->columns] = '\0';
-		// ft_printf("map1 %s\n", grid->map2[row_count]);
+		grid->map2[row_count] = get_next_line(fd2);
+		grid->map[row_count][grid->columns - 1] = '\0';
+		ft_printf("map2 %s\n", grid->map2[row_count]);
+		ft_printf("map1 again %s\n", grid->map[row_count]);
 		row_count++;
 	}
-	close(fd);
+	row_count = 0;
+	while (row_count < grid->rows)
+	{
+		ft_printf("TEST map2 %s\n", grid->map2[row_count]);
+		ft_printf("TEST map1 again %s\n", grid->map[row_count]);
+		row_count++;
+	}
+	close(fd2);
 }
 
 void make_grid(t_map *grid, char *argv)
@@ -171,13 +182,13 @@ void make_grid(t_map *grid, char *argv)
 		ft_printf("fd error\n");
 		free_map(grid, 1);
 	}
-	grid->map = ft_calloc(grid->rows, sizeof(char));
+	grid->map = ft_calloc(grid->rows + 1, sizeof(char *));
 	row_count = 0;
 	while (row_count < grid->rows)
 	{
-		grid->map[row_count] = ft_calloc(grid->columns + 1, sizeof(char));
 		grid->map[row_count] = get_next_line(fd);
-		// ft_printf("map1 %s", grid->map[row_count]);
+		grid->map[row_count][grid->columns - 1] = '\0';
+		ft_printf("map1 %s\n", grid->map[row_count]);
 		row_count++;
 	}
 	close(fd);
@@ -198,15 +209,19 @@ t_map *get_map_using_gnl(char *argv)
 	}
 	grid = ft_calloc(1, sizeof *grid);
 	line_as_str = get_next_line(fd);
-	grid->columns = ft_strlen(line_as_str) - 1;
+	grid->columns = ft_strlen(line_as_str);
+	line_as_str[grid->columns - 1] = '\0';
 	while(line_as_str)
 	{
-	 	ft_printf("%s", line_as_str);
+	 	ft_printf("%s\n", line_as_str);
 		free(line_as_str);
 		line_as_str = get_next_line(fd);
+		if (line_as_str)
+			line_as_str[grid->columns - 1] = '\0';
 		grid->rows++;
 	}
-	free(line_as_str);
+	if (line_as_str)
+		free(line_as_str);
 	close(fd);
 	if (grid->rows < 4 || grid->columns < 4 || grid->rows == grid->columns)
 	{
