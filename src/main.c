@@ -103,16 +103,15 @@ int main(int argc, char *argv[])
 		free_map(grid, 1);
 	}
 	parse_map(grid);
-	grid->win_ptr = mlx_new_window(grid->mlx_ptr, grid->columns * 40,	grid->rows * 40, "My window");
+	grid->win_ptr = mlx_new_window(grid->mlx_ptr, grid->columns * 40,	\
+	grid->rows * 40, "My window");
 	if (grid->win_ptr == NULL)
 	{
 		free(grid->win_ptr);
 		ft_printf("grid->win_ptr error\n");
 		free_map(grid, 1);
 	}
-	////////////////////////////////////////////////////////////////////////////////
 
-	
 	// mlx_hook(data->win_ptr, 17, 0, ft_exit, &data);
 	// mlx_hook(data->win_ptr, 02, 0, press_key, &data);
 	// mlx_loop_hook(data->mlx_ptr, ft_frame, &data);
