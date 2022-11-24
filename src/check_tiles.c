@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_map.c                                     :+:      :+:    :+:   */
+/*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nickras <nickras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 23:19:38 by lshonta           #+#    #+#             */
-/*   Updated: 2022/11/23 16:53:20 by nickras          ###   ########.fr       */
+/*   Updated: 2022/11/24 08:25:40 by nickras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	wall_check(t_map *data)
 	i = 0;
 	while (i < data->rows)
 	{
-		if (data->map[i][0] != '1' || data->map[i][data->columns - 2] != '1')
+		if (data->map[i][0] != '1' && data->map[i][data->columns - 1] != '1')
 		{
-			ft_printf("Error horisontal walls");
+			ft_printf("Error horisontal walls\n");
 			free_map(data, 1);
 		}
 		i++;
@@ -45,26 +45,19 @@ void	char_check(t_map *data)
 
 	i = 0;
 	j = 0;
-	while (data->map[j])
+	while (i < data->rows)
 	{
-		i = 0;
-		while (data->map[j][i])
+		j = 0;
+		while (j < data->columns)
 		{
-			if (data->map[j][i] != '1' && data->map[j][i] != 'D' && data->map[j][i] != 'S'  \
-			&& data->map[j][i] != 'C' && data->map[j][i] != '0')
+			if (data->map[i][j] != '1' && data->map[i][j] != 'D' && \
+			data->map[i][j] != 'S' && data->map[i][j] != 'C' && data->map[i][j] != '0')
 			{
 				ft_printf("There are invalid characters in grid\n");
 				free_map(data, 1);
 			}
-				i++;
+			j++;
 		}
-		j++;
+		i++;
 	}
-}
-
-void	result(t_map *data)
-{
-	mlx_clear_window(data->mlx_ptr, data->win_ptr); //the init and new windows create win_ptr
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->graph->winner,
-		data->columns * 60 / 2.4, data->rows * 60 / 4);
 }

@@ -6,7 +6,7 @@
 #    By: nickras <nickras@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 10:21:39 by nickras           #+#    #+#              #
-#    Updated: 2022/11/23 11:02:12 by nickras          ###   ########.fr        #
+#    Updated: 2022/11/24 09:17:18 by nickras          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,14 +24,9 @@ SRC_DIR = 	./src/
 OBJ_DIR =   ./obj/
 
 
-SRC_FILES = main.c ../gnl/get_next_line_utils.c ../gnl/get_next_line.c \
-../gnl/get_next_line.h ../libftprintf/libftprintf.a ft_create_map.c \
-ft_moving.c ft_check_map.c handle.c
-# so_long.c \
-# 		./src/map_render.c \
-# 		./src/map_load.c \
-# 		./src/map_hooks.c \
-# 		./src/map_check.c \
+SRC_FILES = main.c create_picture.c start_values.c moving.c check_map.c check_tiles.c handle.c check_route.c \
+../gnl/get_next_line_utils.c ../gnl/get_next_line.c \
+../gnl/get_next_line.h ../libftprintf/libftprintf.a 
 
 OBJ_FILES = ${SRC_FILES:.c=.o}
 SRC			= $(addprefix $(SRC_DIR),$(SRC_FILES))
