@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nickras <nickras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 09:49:19 by nickras           #+#    #+#             */
-/*   Updated: 2022/11/24 09:34:44 by nickras          ###   ########.fr       */
+/*   Updated: 2022/11/24 23:05:17 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,9 @@ t_map *allocate_and_check(char *argv);
 
 int	handler_input_loop(int keysym, t_map *data);
 int	no_event(void *data);
-
 void	parse_map(t_map *render);
 int		frame_program(t_map *data);
-void	create_map(t_map *data);
 void	put_images_on_picture(t_map *data);
-int		exit_program(t_map *data);
 int		key_press(int keycode, t_map *data);
 void	char_check(t_map *data);
 void	wall_check(t_map *data);
@@ -104,5 +101,5 @@ void	result(t_map *data);
 void	put_player_to_picture(t_map *data, int *j, int *i);
 void	put_wall_to_picture(t_map *data, int *j, int *i);
 void	put_space_to_picture(t_map *data, int *j, int *i);
-
+int	make_new_frame(t_map *data);
 #endif

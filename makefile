@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nickras <nickras@student.42.fr>            +#+  +:+       +#+         #
+#    By: nick <nick@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 10:21:39 by nickras           #+#    #+#              #
-#    Updated: 2022/11/24 09:17:18 by nickras          ###   ########.fr        #
+#    Updated: 2022/11/24 22:59:47 by nick             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,8 @@ SRC_DIR = 	./src/
 OBJ_DIR =   ./obj/
 
 
-SRC_FILES = main.c create_picture.c start_values.c moving.c check_map.c check_tiles.c handle.c check_route.c \
-../gnl/get_next_line_utils.c ../gnl/get_next_line.c \
+SRC_FILES = main.c create_picture.c start_values.c moving.c check_map.c check_tiles.c \
+events.c check_route.c ../gnl/get_next_line_utils.c ../gnl/get_next_line.c \
 ../gnl/get_next_line.h ../libftprintf/libftprintf.a 
 
 OBJ_FILES = ${SRC_FILES:.c=.o}

@@ -2,8 +2,8 @@
 
 int	no_event(void *data)
 {
-	ft_printf("ptr: %d\n", data);
-	return (0);
+	(void) data;
+	return (EXIT_SUCCESS);
 }
 
 void	result(t_map *data)

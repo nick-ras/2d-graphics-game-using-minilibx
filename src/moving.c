@@ -12,7 +12,6 @@
 
 #include "../so_long.h"
 
-
 void	move_w(t_map *data)
 {
 	if (data->map[data->vert_pos - 1][data->hori_pos] != '1')

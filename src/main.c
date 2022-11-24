@@ -60,17 +60,13 @@ void fill_map (t_map *grid, char *argv)
 	fill_map2(grid, argv);
 }
 
-
-
 void	parse_map(t_map *grid)
 {
 	int	img_height;
 	int	img_width;
 
-	ft_printf("BEFORE\n");
 	grid->player = mlx_xpm_file_to_image(grid->mlx_ptr,
 			PLAYER, &img_width, &img_height);
-	ft_printf("HERE\n");
 	grid->wall = mlx_xpm_file_to_image(grid->mlx_ptr,
 			WALL, &img_width, &img_height);
 	grid->space = mlx_xpm_file_to_image(grid->mlx_ptr,
@@ -81,6 +77,15 @@ void	parse_map(t_map *grid)
 			COLLECT, &img_width, &img_height);
 	grid->winner = mlx_xpm_file_to_image(grid->mlx_ptr,
 			WIN, &img_width, &img_height);
+}
+
+int	make_new_frame(t_map *data)
+{
+	mlx_clear_window(data->mlx_ptr, data->win_ptr);
+	put_images_on_picture(data);
+	if (data->count == 0 && data->exit_found == 1)
+		result(data);
+	return (0);
 }
 
 int main(int argc, char *argv[])
@@ -112,16 +117,16 @@ int main(int argc, char *argv[])
 		free_map(grid, 1);
 	}
 
-	// mlx_hook(data->win_ptr, 17, 0, ft_exit, &data);
-	// mlx_hook(data->win_ptr, 02, 0, press_key, &data);
-	// mlx_loop_hook(data->mlx_ptr, ft_frame, &data);
-	// mlx_loop(data->mlx_ptr);
+	void *mlx = mlx_init();
+  void *win = mlx_new_window(mlx, 640, 360, "Tutorial Window");
+	ft_printf("%p", win); //delete later
+  mlx_loop(mlx);
 
-	// // mlx_loop_hook(grid->mlx_ptr, &no_event, &grid);
-	// // mlx_key_hook(grid->win_ptr, key_press, &grid);
-	// // mlx_hook(grid->win_ptr, KeyRelease, KeyReleaseMask, &handle_keyrelease, &grid);
+	mlx_hook(grid->win_ptr, 17, 0, no_event, &grid);
+	mlx_hook(grid->win_ptr, 02, 0, key_press, &grid);
+	mlx_loop_hook(grid->mlx_ptr, make_new_frame, &grid);
+	mlx_loop(grid->mlx_ptr);
 
-	// mlx_destroy_display(grid->mlx_ptr);
 	// free(grid->mlx_ptr);
 	// free_map(grid, 0);
 	return (0);
