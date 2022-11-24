@@ -6,7 +6,7 @@
 #    By: nick <nick@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 10:21:39 by nickras           #+#    #+#              #
-#    Updated: 2022/11/24 22:59:47 by nick             ###   ########.fr        #
+#    Updated: 2022/11/24 23:14:02 by nick             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ MLX_FLAGS = -lmlx -lXext -lX11 -lm
 MAKE = make
 CC = gcc
 RM = rm -rf
-CFLAG = -Wall -Werror -Wextra -g3
+CFLAG = #-Wall -Werror -Wextra -g3
 SRC_DIR = 	./src/
 OBJ_DIR =   ./obj/
 

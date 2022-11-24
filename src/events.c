@@ -28,6 +28,10 @@ int free_map(t_map *grid, int exit_func)
 	}
 	free(grid->map);
 	free(grid->map2);
+	if (grid->mlx_ptr)
+		free(grid->mlx_ptr);
+	if (grid->win_ptr)
+		free(grid->win_ptr);
 	free(grid);
 	if (exit_func)
 	{

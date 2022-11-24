@@ -99,11 +99,10 @@ int main(int argc, char *argv[])
 	}
 	filename_check(argv[1]);
 	grid = allocate_and_check(argv[1]);
-	grid->filename = *argv;
+	// grid->filename = *argv;
 	grid->mlx_ptr = mlx_init();
 	if (grid->mlx_ptr == NULL)
 	{
-		free(grid->mlx_ptr);
 		ft_printf("mlx_init err\n");
 		free_map(grid, 1);
 	}
@@ -117,73 +116,11 @@ int main(int argc, char *argv[])
 		free_map(grid, 1);
 	}
 
-	void *mlx = mlx_init();
-  void *win = mlx_new_window(mlx, 640, 360, "Tutorial Window");
-	ft_printf("%p", win); //delete later
-  mlx_loop(mlx);
-
-	mlx_hook(grid->win_ptr, 17, 0, no_event, &grid);
+	mlx_hook(grid->win_ptr, 17, 0, no_event, &grid); //better then key_hook
 	mlx_hook(grid->win_ptr, 02, 0, key_press, &grid);
 	mlx_loop_hook(grid->mlx_ptr, make_new_frame, &grid);
 	mlx_loop(grid->mlx_ptr);
 
-	// free(grid->mlx_ptr);
-	// free_map(grid, 0);
+	free_map(grid, 0);
 	return (0);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-	// Display *display;
-	// Window window;
-	// XEvent event;
-	// char *msg = "Hello, Worlds!!!";
-	// int screen;
-
-	// // open connection to the server
-	// display = XOpenDisplay(NULL);
-	// if (display == NULL)
-	// {
-	// 		ft_printf("Cannot open display\n %s\n", stderr);
-	// 		exit(1);
-	// }
-
-	// screen = DefaultScreen(display);
-
-	// // create window
-	// window = XCreateSimpleWindow(display, RootWindow(display, screen), 100, 100, 500, 300, 1,
-	// 															WhitePixel(display, screen), WhitePixel(display, screen));
-
-	// // select kind of events we are interested in
-	// XSelectInput(display, window, ExposureMask | KeyPressMask);
-
-	// // map (show) the window
-	// XMapWindow(display, window);
-
-	// // event loop
-	// while (1)
-	// {
-	// 		XNextEvent(display, &event);
-
-	// 		// // draw or redraw the window
-	// 		if (event.type == Expose)
-	// 		{
-	// 				XFillRectangle(display, window, DefaultGC(display, screen), 40, 	40, 110, 110);
-	// 				XDrawString(display, window, DefaultGC(display, screen), 50, 50, msg, strlen(msg));
-	// 		}
-	// 		// // exit on key press
-	// 		if (event.type == KeyPress)
-	// 				break;
-	// }
-
-	// // close connection to the server
-	// XCloseDisplay(display);
