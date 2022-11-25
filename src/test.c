@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/25 13:49:20 by nick              #+#    #+#             */
+/*   Updated: 2022/11/25 13:49:55 by nick             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mlx.h"
 
-int main()
+int	main(void)
 {
-    void *mlx = mlx_init();
-    void *win = mlx_new_window(mlx, 640, 360, "Tutorial Window");
-    mlx_loop(mlx);
+	void	*mlx = mlx_init();
+	void	*win = mlx_new_window(mlx, 640, 360, "Tutorial Window");
+	mlx_loop(mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:11:02 by lshonta           #+#    #+#             */
-/*   Updated: 2022/11/25 10:37:25 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/25 15:54:49 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	move_w(t_map *data)
 		{
 			data->map[data->vert_pos][data->hori_pos] = '0';
 			data->map[data->vert_pos - 1][data->hori_pos] = 'P';
-			data->count_down_steps--;
 		}
 		else if (data->map[data->vert_pos - 1][data->hori_pos] == '0')
 		{
@@ -31,7 +30,9 @@ void	move_w(t_map *data)
 			&& data->count_down_steps == 0)
 			data->player_on_exit = 1;
 		data->vert_pos--;
+		data->count_down_steps--;
 	}
+	put_part_images_on_picture(data);
 }
 
 void	move_s(t_map *data)
@@ -107,13 +108,13 @@ int	key_press(int keycode, t_map *data)
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 		free_map(data, 0);
 	}
-	else if (keycode == W)
+	else if (keycode == UP)
 		move_w(data);
-	else if (keycode == A)
+	else if (keycode == LEFT)
 		move_a(data);
-	else if (keycode == S)
+	else if (keycode == DOWN)
 		move_s(data);
-	else if (keycode == D)
+	else if (keycode == RIGHT)
 		move_d(data);
 	return (0);
 }

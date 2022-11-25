@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/25 13:20:33 by nick              #+#    #+#             */
+/*   Updated: 2022/11/25 15:00:28 by nick             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../so_long.h"
 //make re  && ./a.out src/map.ber
 
 void	fill_map2(t_map *grid, char *argv)
 {
-int row_count;
+	int	row_count;
 	int	fd2;
 
 	fd2 = open(argv, O_RDONLY);
@@ -20,25 +32,18 @@ int row_count;
 		grid->map2[row_count] = get_next_line(fd2);
 		if (grid->map2[row_count] == NULL)
 		{
-		ft_printf("rows is NULL\n");
-		free_map(grid, 1);
+			ft_printf("rows is NULL\n");
+			free_map(grid, 1);
 		}	
 		grid->map[row_count][grid->columns] = '\0';
 		row_count++;
 	}
-	// row_count = 0;
-	// while (row_count < grid->rows)
-	// {
-	// 	ft_printf("TEST map2 %s", grid->map2[row_count]);
-	// 	ft_printf("TEST map1 again %s\n", grid->map[row_count]);
-	// 	row_count++;
-	// }
 	close(fd2);
 }
 
-void fill_map (t_map *grid, char *argv)
+void	fill_map(t_map *grid, char *argv)
 {
-	int row_count;
+	int	row_count;
 	int	fd;
 
 	fd = open(argv, O_RDONLY);
@@ -53,33 +58,65 @@ void fill_map (t_map *grid, char *argv)
 	{
 		grid->map[row_count] = get_next_line(fd);
 		grid->map[row_count][grid->columns] = '\0';
-		// ft_printf("fill_map %d", ft_strlen(grid->map[row_count]));
 		row_count++;
 	}
 	close(fd);
 	fill_map2(grid, argv);
+	check_squares(grid);
+	wall_check(grid);
+	char_check(grid);
 }
+		// ft_printf("fill_map %d", ft_strlen(grid->map[row_count]));
 
 void	parse_map(t_map *grid)
 {
 	int	img_height;
 	int	img_width;
 
-	grid->player = mlx_xpm_file_to_image(grid->mlx_ptr,
+	grid->player_pic = mlx_xpm_file_to_image(grid->mlx_ptr,
 			PLAYER, &img_width, &img_height);
-	grid->wall = mlx_xpm_file_to_image(grid->mlx_ptr,
+	grid->wall_pic = mlx_xpm_file_to_image(grid->mlx_ptr,
 			WALL, &img_width, &img_height);
-	grid->space = mlx_xpm_file_to_image(grid->mlx_ptr,
+	grid->space_pic = mlx_xpm_file_to_image(grid->mlx_ptr,
 			EMPTY_SPACE, &img_width, &img_height);
-	grid->door = mlx_xpm_file_to_image(grid->mlx_ptr,
+	grid->door_pic = mlx_xpm_file_to_image(grid->mlx_ptr,
 			EXIT, &img_width, &img_height);
-	grid->collectible = mlx_xpm_file_to_image(grid->mlx_ptr,
+	grid->collectible_pic = mlx_xpm_file_to_image(grid->mlx_ptr,
 			COLLECT, &img_width, &img_height);
-	grid->winner = mlx_xpm_file_to_image(grid->mlx_ptr,
+	grid->winner_pic = mlx_xpm_file_to_image(grid->mlx_ptr,
 			WIN, &img_width, &img_height);
 }
 
-int main(int argc, char *argv[])
+void	check_and_malloc(t_map *grid, char *argv)
+{
+	int		fd;
+	char	*line_as_str;
+
+	fd = get_fd(argv);
+	line_as_str = get_next_line(fd);
+	set_columns(grid, line_as_str);
+	while (line_as_str)
+	{
+		line_as_str[grid->columns] = '\0';
+		if ((int)ft_strlen(line_as_str) != grid->columns)
+		{
+			ft_printf("line not same length as start line\n");
+			free_map(grid, 1);
+		}
+		free(line_as_str);
+		line_as_str = get_next_line(fd);
+		grid->rows++;
+	}
+	ft_printf("grid->rows = %d\n", grid->rows);
+	close(fd);
+	if (grid->rows < 4 || grid->columns < 4 || grid->rows == grid->columns)
+	{
+		ft_printf("not enough rows or columns or map is not a rectangle");
+		exit (1);
+	}
+}
+
+int	main(int argc, char *argv[])
 {
 	t_map	*grid;
 
@@ -89,33 +126,25 @@ int main(int argc, char *argv[])
 		return (1);
 	}
 	filename_check(argv[1]);
-	grid = init_map(grid);
+	grid = ft_calloc(1, sizeof (t_map));
+	init_map(grid);
 	check_and_malloc(grid, argv[1]);
 	fill_map(grid, argv[1]);
-	check_squares(grid);
-	wall_check(grid);
-	char_check(grid);
-	// grid->filename = *argv;
 	grid->mlx_ptr = mlx_init();
-	if (grid->mlx_ptr == NULL)
-	{
-		ft_printf("mlx_init err\n");
-		free_map(grid, 1);
-	}
-	grid->win_ptr = mlx_new_window(grid->mlx_ptr, grid->columns * 40,	\
+	check_ptr(grid, grid->mlx_ptr);
+	grid->win_ptr = mlx_new_window(grid->mlx_ptr, grid->columns * 40, \
 	grid->rows * 40, "My window");
-	if (grid->win_ptr == NULL)
-	{
-		free(grid->win_ptr);
-		ft_printf("grid->win_ptr error\n");
-		free_map(grid, 1);
-	}
+	check_ptr(grid, grid->win_ptr);
 	parse_map(grid);
 	put_images_on_picture(grid);
-	mlx_hook(grid->win_ptr, 17, 0, no_event, &grid); //better then key_hook
-	mlx_hook(grid->win_ptr, 02, 0, key_press, &grid);
+	mlx_hook(grid->win_ptr, KEYPRESS_EXIT, 2, no_event, &grid);
+	mlx_hook(grid->win_ptr, KEYPRESS_EVENT, 0, key_press, &grid);
 	mlx_loop(grid->mlx_ptr);
-
 	free_map(grid, 0);
 	return (0);
 }
+
+
+// mlx_loop -->A part of the window should be re-drawn
+// (this is called an "expose" event, and it is your program's job to handle it).
+// .br

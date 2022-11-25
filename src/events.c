@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   events.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/25 13:20:11 by nick              #+#    #+#             */
+/*   Updated: 2022/11/25 13:45:59 by nick             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../so_long.h"
 
 int	no_event(void *data)
@@ -8,12 +20,12 @@ int	no_event(void *data)
 
 void	result(t_map *data)
 {
-	mlx_clear_window(data->mlx_ptr, data->win_ptr); //the init and new windows create win_ptr
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->winner,
+	mlx_clear_window(data->mlx_ptr, data->win_ptr);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->winner_pic,
 		data->columns * 40 / 2.4, data->rows * 40 / 4);
 }
 
-int free_map(t_map *grid, int exit_func)
+int	free_map(t_map *grid, int exit_func)
 {
 	int	i;
 
@@ -39,4 +51,14 @@ int free_map(t_map *grid, int exit_func)
 		exit(EXIT_FAILURE);
 	}
 	exit(EXIT_SUCCESS);
+}
+
+void	check_ptr(t_map *map, void *ptr)
+{
+	if (ptr == NULL)
+	{
+		free(ptr);
+		ft_printf("grid->win_ptr error\n");
+		free_map(map, 1);
+	}
 }
