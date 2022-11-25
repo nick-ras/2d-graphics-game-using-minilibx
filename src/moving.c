@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moving.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nickras <nickras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:11:02 by lshonta           #+#    #+#             */
-/*   Updated: 2022/11/24 08:53:18 by nickras          ###   ########.fr       */
+/*   Updated: 2022/11/25 10:37:25 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	move_w(t_map *data)
 		{
 			data->map[data->vert_pos][data->hori_pos] = '0';
 			data->map[data->vert_pos - 1][data->hori_pos] = 'P';
-			data->count--;
+			data->count_down_steps--;
 		}
 		else if (data->map[data->vert_pos - 1][data->hori_pos] == '0')
 		{
@@ -28,8 +28,8 @@ void	move_w(t_map *data)
 			data->map[data->vert_pos - 1][data->hori_pos] = 'P';
 		}
 		else if (data->map[data->vert_pos - 1][data->hori_pos] == 'E'
-			&& data->count == 0)
-			data->exit_found = 1;
+			&& data->count_down_steps == 0)
+			data->player_on_exit = 1;
 		data->vert_pos--;
 	}
 }
@@ -42,7 +42,7 @@ void	move_s(t_map *data)
 		{
 			data->map[data->vert_pos][data->hori_pos] = '0';
 			data->map[data->vert_pos + 1][data->hori_pos] = 'P';
-			data->count--;
+			data->count_down_steps--;
 		}
 		else if (data->map[data->vert_pos + 1][data->hori_pos] == '0')
 		{
@@ -50,8 +50,8 @@ void	move_s(t_map *data)
 			data->map[data->vert_pos + 1][data->hori_pos] = 'P';
 		}
 		else if (data->map[data->vert_pos + 1][data->hori_pos] == 'E'
-			&& data->count == 0)
-			data->exit_found = 1;
+			&& data->count_down_steps == 0)
+			data->player_on_exit = 1;
 		data->vert_pos++;
 	}
 }
@@ -64,7 +64,7 @@ void	move_a(t_map *data)
 		{
 			data->map[data->vert_pos][data->hori_pos] = '0';
 			data->map[data->vert_pos][data->hori_pos - 1] = 'P';
-			data->count--;
+			data->count_down_steps--;
 		}
 		else if (data->map[data->vert_pos][data->hori_pos - 1] == '0')
 		{
@@ -72,8 +72,8 @@ void	move_a(t_map *data)
 			data->map[data->vert_pos][data->hori_pos - 1] = 'P';
 		}
 		else if (data->map[data->vert_pos][data->hori_pos - 1] == 'E'
-			&& data->count == 0)
-			data->exit_found = 1;
+			&& data->count_down_steps == 0)
+			data->player_on_exit = 1;
 		data->hori_pos--;
 	}
 }
@@ -86,7 +86,7 @@ void	move_d(t_map *data)
 		{
 			data->map[data->vert_pos][data->hori_pos] = '0';
 			data->map[data->vert_pos][data->hori_pos + 1] = 'P';
-			data->count--;
+			data->count_down_steps--;
 		}
 		else if (data->map[data->vert_pos][data->hori_pos + 1] == '0')
 		{
@@ -94,8 +94,8 @@ void	move_d(t_map *data)
 			data->map[data->vert_pos][data->hori_pos + 1] = 'P';
 		}
 		else if (data->map[data->vert_pos][data->hori_pos + 1] == 'E'
-			&& data->count == 0)
-			data->exit_found = 1;
+			&& data->count_down_steps == 0)
+			data->player_on_exit = 1;
 		data->hori_pos++;
 	}
 }

@@ -70,22 +70,13 @@ void	parse_map(t_map *grid)
 	grid->wall = mlx_xpm_file_to_image(grid->mlx_ptr,
 			WALL, &img_width, &img_height);
 	grid->space = mlx_xpm_file_to_image(grid->mlx_ptr,
-			EMPTY, &img_width, &img_height);
+			EMPTY_SPACE, &img_width, &img_height);
 	grid->door = mlx_xpm_file_to_image(grid->mlx_ptr,
 			EXIT, &img_width, &img_height);
 	grid->collectible = mlx_xpm_file_to_image(grid->mlx_ptr,
 			COLLECT, &img_width, &img_height);
 	grid->winner = mlx_xpm_file_to_image(grid->mlx_ptr,
 			WIN, &img_width, &img_height);
-}
-
-int	make_new_frame(t_map *data)
-{
-	mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	put_images_on_picture(data);
-	if (data->count == 0 && data->exit_found == 1)
-		result(data);
-	return (0);
 }
 
 int main(int argc, char *argv[])
@@ -98,7 +89,12 @@ int main(int argc, char *argv[])
 		return (1);
 	}
 	filename_check(argv[1]);
-	grid = allocate_and_check(argv[1]);
+	grid = init_map(grid);
+	check_and_malloc(grid, argv[1]);
+	fill_map(grid, argv[1]);
+	check_squares(grid);
+	wall_check(grid);
+	char_check(grid);
 	// grid->filename = *argv;
 	grid->mlx_ptr = mlx_init();
 	if (grid->mlx_ptr == NULL)
@@ -106,7 +102,6 @@ int main(int argc, char *argv[])
 		ft_printf("mlx_init err\n");
 		free_map(grid, 1);
 	}
-	parse_map(grid);
 	grid->win_ptr = mlx_new_window(grid->mlx_ptr, grid->columns * 40,	\
 	grid->rows * 40, "My window");
 	if (grid->win_ptr == NULL)
@@ -115,10 +110,10 @@ int main(int argc, char *argv[])
 		ft_printf("grid->win_ptr error\n");
 		free_map(grid, 1);
 	}
-
+	parse_map(grid);
+	put_images_on_picture(grid);
 	mlx_hook(grid->win_ptr, 17, 0, no_event, &grid); //better then key_hook
 	mlx_hook(grid->win_ptr, 02, 0, key_press, &grid);
-	mlx_loop_hook(grid->mlx_ptr, make_new_frame, &grid);
 	mlx_loop(grid->mlx_ptr);
 
 	free_map(grid, 0);

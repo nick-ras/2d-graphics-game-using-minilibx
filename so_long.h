@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 09:49:19 by nickras           #+#    #+#             */
-/*   Updated: 2022/11/24 23:05:17 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/25 12:29:30 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # include <unistd.h>
 # include <memory.h>
 # define WALL "./pictures/wall.xpm"
-# define EMPTY "./pictures/space.xpm"
+# define EMPTY_SPACE "./pictures/space.xpm"
 # define PLAYER "./pictures/player.xpm"
 # define EXIT "./pictures/door.xpm"
 # define COLLECT "./pictures/collectible.xpm"
@@ -43,25 +43,24 @@
 
 typedef struct s_map
 {
-	int 	rows;
-	int 	columns;
+	//count of variables, check that route is possible
 	int		Start[2];
 	int		Door[2];
 	int		collectibles;
 	int 	S_count;
 	int		D_count;
 	int		door_check_recursive;
+
+	int 	rows;
+	int 	columns;
 	char	**map;
 	char	**map2;
 	int		hori_pos;
 	int		vert_pos;
-	int		players;
-	int		exit_found;
-	int		count;
-	int		step;
+	int		player_on_exit;
+	int		count_down_steps;
 	void	*mlx_ptr;
 	void	*win_ptr;
-	char	*filename;
 
 // pictures
 	void	*wall;
@@ -73,21 +72,20 @@ typedef struct s_map
 } t_map;
 
 
-void	init_map(t_map *grid);
+t_map *init_map(t_map *grid);
+void	check_and_malloc(t_map *grid, char *argv);
 void start(t_map *grid, int row_count, int col_count);
 void door(t_map *grid, int row_count, int col_count);
 void collectibles(t_map *grid, int row_count, int col_count);
 int	dfs(t_map *grid, int count_row, int count_col, int door);
 int free_map(t_map *map, int exit_func);
 void check_squares(t_map *grid);
-void check_map(t_map *grid, char *line_as_str, int fd);
 int get_fd(char *argv);
 void	fill_map(t_map *grid, char *argv);
 void	fill_map2(t_map *grid, char *argv);
 void filename_check(char *map);
 void before_recursion(t_map *grid);
 int main(int argc, char *argv[]);
-t_map *allocate_and_check(char *argv);
 
 int	handler_input_loop(int keysym, t_map *data);
 int	no_event(void *data);
@@ -98,8 +96,5 @@ int		key_press(int keycode, t_map *data);
 void	char_check(t_map *data);
 void	wall_check(t_map *data);
 void	result(t_map *data);
-void	put_player_to_picture(t_map *data, int *j, int *i);
-void	put_wall_to_picture(t_map *data, int *j, int *i);
-void	put_space_to_picture(t_map *data, int *j, int *i);
 int	make_new_frame(t_map *data);
 #endif

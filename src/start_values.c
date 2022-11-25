@@ -1,7 +1,8 @@
 #include "../so_long.h"
 
-void	init_map(t_map *grid)
+t_map *init_map(t_map *grid)
 {
+	grid = ft_calloc(1, sizeof (t_map));
 	grid->S_count = 0;
 	grid->D_count = 0;
 	grid->collectibles = 0;
@@ -10,9 +11,8 @@ void	init_map(t_map *grid)
 	grid->Start[1] = 0;
 	grid->Door[0] = 0;
 	grid->Door[1] = 0;
-	grid->exit_found = 0;
-	grid->count = 0;
-	grid->step = 0;
+	grid->player_on_exit = 0;
+	grid->count_down_steps = 20;
 }
 
 void start(t_map *grid, int row_count, int col_count)

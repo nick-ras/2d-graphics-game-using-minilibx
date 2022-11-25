@@ -25,7 +25,6 @@ void check_squares(t_map *grid)
 	int	row_count;
 	int	col_count;
 
-	init_map(grid);
 	row_count = 0;
 	while (row_count < grid->rows)
 	{

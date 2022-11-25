@@ -12,16 +12,20 @@ int get_fd(char *argv)
 	}
 	return (fd);
 }
-void	check_map(t_map *grid, char *line_as_str, int fd)
+
+void	check_and_malloc(t_map *grid, char *argv)
 {
+	int		fd;
+	char	*line_as_str;
 	int	i;
 
+	fd = get_fd(argv);
+	line_as_str = get_next_line(fd);
 	i = 0;
 	while (line_as_str[i] != '\n' && line_as_str[i] != '\0')
 		i++;
 	grid->columns = i;
 	ft_printf("grid->columns %d\n", grid->columns);
-	i = 0;
 	while (line_as_str)
 	{
 		line_as_str[grid->columns] = '\0';
@@ -34,32 +38,14 @@ void	check_map(t_map *grid, char *line_as_str, int fd)
 		free(line_as_str);
 		line_as_str = get_next_line(fd);
 		grid->rows++;
-		i++;
 	}
 	ft_printf("grid->rows = %d\n", grid->rows);
 	close(fd);
-}
-
-t_map *allocate_and_check(char *argv)
-{
-	t_map	*grid;
-	int		fd;
-	char	*line_as_str;
-
-	fd = get_fd(argv);
-	grid = ft_calloc(1, sizeof (t_map));
-	line_as_str = get_next_line(fd);
-	check_map(grid, line_as_str, fd); //can delete
 	if (grid->rows < 4 || grid->columns < 4 || grid->rows == grid->columns)
 	{
 		ft_printf("not enough rows or columns or map is not a rectangle");
 		exit (1);
 	}
-	fill_map(grid, argv);
-	check_squares(grid);
-	wall_check(grid);
-	char_check(grid);
-	return (grid);
 }
 
 void	filename_check(char *map)
