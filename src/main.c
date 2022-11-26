@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:20:33 by nick              #+#    #+#             */
-/*   Updated: 2022/11/25 15:00:28 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/26 11:32:24 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	fill_map(t_map *grid, char *argv)
 	fill_map2(grid, argv);
 	check_squares(grid);
 	wall_check(grid);
-	char_check(grid);
 }
 		// ft_printf("fill_map %d", ft_strlen(grid->map[row_count]));
 
@@ -130,6 +129,7 @@ int	main(int argc, char *argv[])
 	init_map(grid);
 	check_and_malloc(grid, argv[1]);
 	fill_map(grid, argv[1]);
+	check_valid_route(grid);
 	grid->mlx_ptr = mlx_init();
 	check_ptr(grid, grid->mlx_ptr);
 	grid->win_ptr = mlx_new_window(grid->mlx_ptr, grid->columns * 40, \

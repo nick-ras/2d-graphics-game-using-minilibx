@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:11:02 by lshonta           #+#    #+#             */
-/*   Updated: 2022/11/25 15:54:49 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/26 11:51:09 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,90 +14,93 @@
 
 void	move_w(t_map *data)
 {
-	if (data->map[data->vert_pos - 1][data->hori_pos] != '1')
+	if (data->map[data->start_pos[0] - 1][data->start_pos[1]] != '1')
 	{
-		if (data->map[data->vert_pos - 1][data->hori_pos] == 'C')
+		if (data->map[data->start_pos[0] - 1][data->start_pos[1]] == 'C')
 		{
-			data->map[data->vert_pos][data->hori_pos] = '0';
-			data->map[data->vert_pos - 1][data->hori_pos] = 'P';
+			data->map[data->start_pos[0]][data->start_pos[1]] = '0';
+			data->map[data->start_pos[0] - 1][data->start_pos[1]] = 'P';
+			data->collectibles--;
 		}
-		else if (data->map[data->vert_pos - 1][data->hori_pos] == '0')
+		else if (data->map[data->start_pos[0] - 1][data->start_pos[1]] == '0')
 		{
-			data->map[data->vert_pos][data->hori_pos] = '0';
-			data->map[data->vert_pos - 1][data->hori_pos] = 'P';
+			data->map[data->start_pos[0]][data->start_pos[1]] = '0';
+			data->map[data->start_pos[0] - 1][data->start_pos[1]] = 'P';
 		}
-		else if (data->map[data->vert_pos - 1][data->hori_pos] == 'E'
+		else if (data->map[data->start_pos[0] - 1][data->start_pos[1]] == 'E'
 			&& data->count_down_steps == 0)
 			data->player_on_exit = 1;
-		data->vert_pos--;
+		data->start_pos[0]--;
 		data->count_down_steps--;
 	}
-	put_part_images_on_picture(data);
 }
 
 void	move_s(t_map *data)
 {
-	if (data->map[data->vert_pos + 1][data->hori_pos] != '1')
+	if (data->map[data->start_pos[0] + 1][data->start_pos[1]] != '1')
 	{
-		if (data->map[data->vert_pos + 1][data->hori_pos] == 'C')
+		if (data->map[data->start_pos[0] + 1][data->start_pos[1]] == 'C')
 		{
-			data->map[data->vert_pos][data->hori_pos] = '0';
-			data->map[data->vert_pos + 1][data->hori_pos] = 'P';
+			data->map[data->start_pos[0]][data->start_pos[1]] = '0';
+			data->map[data->start_pos[0] + 1][data->start_pos[1]] = 'P';
 			data->count_down_steps--;
+			data->collectibles--;
 		}
-		else if (data->map[data->vert_pos + 1][data->hori_pos] == '0')
+		else if (data->map[data->start_pos[0] + 1][data->start_pos[1]] == '0')
 		{
-			data->map[data->vert_pos][data->hori_pos] = '0';
-			data->map[data->vert_pos + 1][data->hori_pos] = 'P';
+			data->map[data->start_pos[0]][data->start_pos[1]] = '0';
+			data->map[data->start_pos[0] + 1][data->start_pos[1]] = 'P';
 		}
-		else if (data->map[data->vert_pos + 1][data->hori_pos] == 'E'
+		else if (data->map[data->start_pos[0] + 1][data->start_pos[1]] == 'E'
 			&& data->count_down_steps == 0)
 			data->player_on_exit = 1;
-		data->vert_pos++;
+		data->start_pos[0]++;
 	}
 }
 
 void	move_a(t_map *data)
 {
-	if (data->map[data->vert_pos][data->hori_pos - 1] != '1')
+	if (data->map[data->start_pos[0]][data->start_pos[1] - 1] != '1')
 	{
-		if (data->map[data->vert_pos][data->hori_pos - 1] == 'C')
+		if (data->map[data->start_pos[0]][data->start_pos[1] - 1] == 'C')
 		{
-			data->map[data->vert_pos][data->hori_pos] = '0';
-			data->map[data->vert_pos][data->hori_pos - 1] = 'P';
+			data->map[data->start_pos[0]][data->start_pos[1]] = '0';
+			data->map[data->start_pos[0]][data->start_pos[1] - 1] = 'P';
 			data->count_down_steps--;
+			data->collectibles--;
 		}
-		else if (data->map[data->vert_pos][data->hori_pos - 1] == '0')
+		else if (data->map[data->start_pos[0]][data->start_pos[1] - 1] == '0')
 		{
-			data->map[data->vert_pos][data->hori_pos] = '0';
-			data->map[data->vert_pos][data->hori_pos - 1] = 'P';
+			data->map[data->start_pos[0]][data->start_pos[1]] = '0';
+			data->map[data->start_pos[0]][data->start_pos[1] - 1] = 'P';
 		}
-		else if (data->map[data->vert_pos][data->hori_pos - 1] == 'E'
+		else if (data->map[data->start_pos[0]][data->start_pos[1] - 1] == 'E'
 			&& data->count_down_steps == 0)
 			data->player_on_exit = 1;
-		data->hori_pos--;
+		data->start_pos[1]--;
 	}
 }
 
 void	move_d(t_map *data)
 {
-	if (data->map[data->vert_pos][data->hori_pos + 1] != '1')
+	if (data->map[data->start_pos[0]][data->start_pos[1] + 1] != '1')
 	{
-		if (data->map[data->vert_pos][data->hori_pos + 1] == 'C')
+		if (data->map[data->start_pos[0]][data->start_pos[1] + 1] == 'C')
 		{
-			data->map[data->vert_pos][data->hori_pos] = '0';
-			data->map[data->vert_pos][data->hori_pos + 1] = 'P';
+			data->map[data->start_pos[0]][data->start_pos[1]] = '0';
+			data->map[data->start_pos[0]][data->start_pos[1] + 1] = 'P';
 			data->count_down_steps--;
+			data->collectibles--;
 		}
-		else if (data->map[data->vert_pos][data->hori_pos + 1] == '0')
+		else if (data->map[data->start_pos[0]][data->start_pos[1] + 1] == '0')
 		{
-			data->map[data->vert_pos][data->hori_pos] = '0';
-			data->map[data->vert_pos][data->hori_pos + 1] = 'P';
+			data->map[data->start_pos[0]][data->start_pos[1]] = '0';
+			data->map[data->start_pos[0]][data->start_pos[1] + 1] = 'P';
 		}
-		else if (data->map[data->vert_pos][data->hori_pos + 1] == 'E'
+		else if (data->map[data->start_pos[0]][data->start_pos[1] + 1] == 'E'
 			&& data->count_down_steps == 0)
 			data->player_on_exit = 1;
-		data->hori_pos++;
+		data->start_pos[1]++;
 	}
 }
 

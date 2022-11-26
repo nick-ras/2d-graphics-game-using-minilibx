@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 09:49:19 by nickras           #+#    #+#             */
-/*   Updated: 2022/11/25 15:53:17 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/26 11:36:54 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ typedef struct s_map
 	char	**map;
 	char	**map2;
 	char	lst_pos;
-	int		hori_pos;
-	int		vert_pos;
 	int		collectibles;
 	int		player_on_exit;
 	int		count_down_steps;
@@ -80,10 +78,10 @@ int		dfs(t_map *grid, int count_row, int count_col, int door);
 int		free_map(t_map *map, int exit_func);
 void	check_squares(t_map *grid);
 int		get_fd(char *argv);
+void	filename_check(char *map);
 void	fill_map(t_map *grid, char *argv);
 void	fill_map2(t_map *grid, char *argv);
-void	filename_check(char *map);
-void	before_recursion(t_map *grid);
+void	check_valid_route(t_map *grid);
 void	put_images_on_picture_nested(t_map *data, int i, int j);
 int		main(int argc, char *argv[]);
 void	init_map(t_map *grid);
@@ -93,7 +91,7 @@ void	parse_map(t_map *render);
 void	put_images_on_picture(t_map *data);
 void	put_part_images_on_picture(t_map *data);
 int		key_press(int keycode, t_map *data);
-void	char_check(t_map *data);
+void	char_check(t_map *data, int i, int j);
 void	wall_check(t_map *data);
 void	result(t_map *data);
 void	check_ptr(t_map *map, void *ptr);
