@@ -6,72 +6,72 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:33:04 by nick              #+#    #+#             */
-/*   Updated: 2022/11/26 11:38:03 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/26 12:08:59 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	start(t_map *grid, int i, int j)
+void	start(t_map *map, int i, int j)
 {
-	if (grid->map[i][j] == 'S')
+	if (map->map[i][j] == 'S')
 	{
-		if (grid->count_s != 0)
+		if (map->count_start != 0)
 		{
 			ft_printf("too many entrances\n");
-			free_map(grid, 1);
+			free_map(map, 1);
 		}
-		grid->start_pos[0] = i;
-		grid->start_pos[1] = j;
-		grid->count_s++;
+		map->start_pos[0] = i;
+		map->start_pos[1] = j;
+		map->count_start++;
 	}
 }
 
-void	door(t_map *grid, int i, int j)
+void	door(t_map *map, int i, int j)
 {
-	if (grid->map[i][j] == 'D')
+	if (map->map[i][j] == 'D')
 	{
-		if (grid->door_count != 0)
+		if (map->door_count != 0)
 		{
 			ft_printf("too many doors\n");
-			free_map(grid, 1);
+			free_map(map, 1);
 		}
-		grid->exit_pos[0] = i;
-		grid->exit_pos[1] = j;
-		grid->door_count++;
+		map->exit_pos[0] = i;
+		map->exit_pos[1] = j;
+		map->door_count++;
 	}
 }
-// ft_printf("door %d and %d \n", grid->D[0], grid->D[1]);
+// ft_printf("door %d and %d \n", map->D[0], map->D[1]);
 
-void	collectibles(t_map *grid, int i, int j)
+void	collectibles(t_map *map, int i, int j)
 {
-	if (grid->map[i][j] == 'C')
-		grid->collectibles++;
+	if (map->map[i][j] == 'C')
+		map->collectibles++;
 }
 
 
-void	check_squares(t_map *grid)
+void	check_squares(t_map *map)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < grid->rows)
+	while (i < map->rows)
 	{
 		j = 0;
-		while (j < grid->columns)
+		while (j < map->columns)
 		{
-			start(grid, i, j);
-			door(grid, i, j);
-			collectibles(grid, i, j);
-			char_check(grid, i, j);
+			start(map, i, j);
+			door(map, i, j);
+			collectibles(map, i, j);
+			char_check(map, i, j);
 			j++;
 		}
 		i++;
 	}
-	if (grid->door_count < 1 || grid->count_s < 1 || grid->collectibles < 1)
+	if (map->door_count < 1 || map->count_start < 1 || map->collectibles < 1)
 	{
 		ft_printf("missing values, could ne start, door or collectible.");
-		free_map(grid, 1);
+		free_map(map, 1);
 	}
 }

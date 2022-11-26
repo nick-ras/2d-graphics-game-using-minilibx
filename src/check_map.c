@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:29:40 by nick              #+#    #+#             */
-/*   Updated: 2022/11/25 13:49:11 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/26 12:09:06 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ int	get_fd(char *argv)
 	return (fd);
 }
 
-void	set_columns(t_map *grid, char *line_as_str)
+void	set_columns(t_map *map, char *line_as_str)
 {
 	int	i;
 
 	i = 0;
 	while (line_as_str[i] != '\n' && line_as_str[i] != '\0')
 		i++;
-	grid->columns = i;
-	ft_printf("grid->columns %d\n", grid->columns);
+	map->columns = i;
+	ft_printf("map->columns %d\n", map->columns);
 }

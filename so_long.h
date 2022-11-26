@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 09:49:19 by nickras           #+#    #+#             */
-/*   Updated: 2022/11/26 11:36:54 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/26 14:09:40 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@
 # define EXIT "./pictures/door.xpm"
 # define COLLECT "./pictures/collectible.xpm"
 # define WIN "./pictures/winner.xpm"
-# define ESC 65307
-# define LEFT 97
-# define RIGHT 100
-# define UP 119
-# define DOWN 115 
+# define ESC XK_Escape //65307
+# define LEFT XK_a //0x0061 //97
+# define RIGHT XK_d  //0xff53  // 0x0064 //100
+# define UP XK_w //0xff52 //0x0077 //119
+# define DOWN XK_s //0x0073 //115 
 # define KEYPRESS_EVENT 2
 # define KEYPRESS_EXIT 17
 
@@ -47,9 +47,8 @@ typedef struct s_map
 {
 	int		start_pos[2];
 	int		exit_pos[2];
-	int		count_s;
+	int		count_start;
 	int		door_count;
-	int		door_check_recursive;
 
 	int		rows;
 	int		columns;
@@ -61,6 +60,7 @@ typedef struct s_map
 	int		count_down_steps;
 	void	*mlx_ptr;
 	void	*win_ptr;
+	int		key_pressed;
 
 	void	*wall_pic;
 	void	*space_pic;
@@ -70,29 +70,42 @@ typedef struct s_map
 	void	*winner_pic;
 }	t_map;
 
-void	set_columns(t_map *grid, char *line_as_str);
+
+void	check_squares(t_map *grid);
 void	start(t_map *grid, int row_count, int col_count);
 void	door(t_map *grid, int row_count, int col_count);
 void	collectibles(t_map *grid, int row_count, int col_count);
-int		dfs(t_map *grid, int count_row, int count_col, int door);
-int		free_map(t_map *map, int exit_func);
-void	check_squares(t_map *grid);
-int		get_fd(char *argv);
-void	filename_check(char *map);
-void	fill_map(t_map *grid, char *argv);
-void	fill_map2(t_map *grid, char *argv);
-void	check_valid_route(t_map *grid);
-void	put_images_on_picture_nested(t_map *data, int i, int j);
-int		main(int argc, char *argv[]);
-void	init_map(t_map *grid);
+
 void	check_and_malloc(t_map *grid, char *argv);
-int		no_event(void *data);
-void	parse_map(t_map *render);
-void	put_images_on_picture(t_map *data);
-void	put_part_images_on_picture(t_map *data);
-int		key_press(int keycode, t_map *data);
+void	filename_check(char *map);
+void	check_valid_route(t_map *grid);
 void	char_check(t_map *data, int i, int j);
 void	wall_check(t_map *data);
+
+int		main(int argc, char *argv[]);
+void	fill_map(t_map *grid, char *argv);
+void	fill_map2(t_map *grid, char *argv);
+void	set_columns(t_map *grid, char *line_as_str);
+
+int		dfs(t_map *grid, int count_row, int count_col, int door);
+int		free_map(t_map *map, int exit_func);
+int		get_fd(char *argv);
+void	init_map(t_map *grid);
+int		no_event(void *data);
+
+void	set_picture_pointers(t_map *render);
+void	put_images_on_picture_nested(t_map *data, int i, int j);
+void	put_images_on_picture(t_map *data);
+// void	put_part_images_on_picture(t_map *data);
+int update_window(t_map *map);
+
 void	result(t_map *data);
 void	check_ptr(t_map *map, void *ptr);
+void	update_pixel(t_map *data, int i, int j);
+
+int		key_press(int keycode, t_map *data);
+void	move_w(t_map *data);
+void	move_d(t_map *data);
+void	move_a(t_map *data);
+void	move_s(t_map *data);
 #endif
