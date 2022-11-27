@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:20:33 by nick              #+#    #+#             */
-/*   Updated: 2022/11/27 18:58:51 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/27 19:18:59 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ int	main(int argc, char *argv[])
 	put_images_on_picture(map);
 	mlx_hook(map->win_ptr, KEYPRESS_EXIT, (1L << 2), no_event, &map);
 	mlx_hook(map->win_ptr, KEYPRESS_EVENT, (1L << 0), key_press, &map); //handles all inputs
-	mlx_loop_hook(map->mlx_ptr, update_window, &map);
+	//mlx_loop_hook(map->mlx_ptr, update_window, &map);
 	mlx_loop(map->mlx_ptr); //Keeps the program running
 	free_map(map, 0);
 	return (0);
