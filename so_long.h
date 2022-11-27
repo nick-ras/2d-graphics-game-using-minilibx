@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 09:49:19 by nickras           #+#    #+#             */
-/*   Updated: 2022/11/26 14:09:40 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/27 18:57:58 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct s_map
 	int		count_down_steps;
 	void	*mlx_ptr;
 	void	*win_ptr;
-	int		key_pressed;
+	// int		key_pressed;
 
 	void	*wall_pic;
 	void	*space_pic;
@@ -97,7 +97,7 @@ void	set_picture_pointers(t_map *render);
 void	put_images_on_picture_nested(t_map *data, int i, int j);
 void	put_images_on_picture(t_map *data);
 // void	put_part_images_on_picture(t_map *data);
-int update_window(t_map *map);
+int 	update_window(t_map *map);
 
 void	result(t_map *data);
 void	check_ptr(t_map *map, void *ptr);

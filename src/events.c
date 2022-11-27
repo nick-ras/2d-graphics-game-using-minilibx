@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:20:11 by nick              #+#    #+#             */
-/*   Updated: 2022/11/26 12:09:21 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/27 17:59:27 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,8 @@ int	free_map(t_map *map, int exit_func)
 	}
 	free(map->map);
 	free(map->map2);
-	if (map->mlx_ptr)
-		free(map->mlx_ptr);
-	if (map->win_ptr)
-		free(map->win_ptr);
+	if (map->mlx_ptr || map->win_ptr)
+		mlx_destroy_window(map->mlx_ptr, map->win_ptr);
 	free(map);
 	if (exit_func)
 	{

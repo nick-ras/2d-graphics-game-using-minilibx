@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 23:19:38 by lshonta           #+#    #+#             */
-/*   Updated: 2022/11/26 12:09:14 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/27 17:36:50 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	wall_check(t_map *map)
 void	char_check(t_map *map, int i, int j)
 {
 	if (map->map[i][j] != '1' && map->map[i][j] != 'D' && \
-	map->map[i][j] != 'S' && map->map[i][j] != 'C' \
+	map->map[i][j] != 'P' && map->map[i][j] != 'C' \
 	&& map->map[i][j] != '0')
 	{
 		ft_printf("There are invalid characters in map\n");
