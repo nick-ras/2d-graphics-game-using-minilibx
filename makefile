@@ -6,7 +6,7 @@
 #    By: nick <nick@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 10:21:39 by nickras           #+#    #+#              #
-#    Updated: 2022/11/26 11:26:11 by nick             ###   ########.fr        #
+#    Updated: 2022/11/28 18:58:48 by nick             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,8 @@ SRC_DIR = 	./src/
 OBJ_DIR =   ./obj/
 
 
-SRC_FILES = main.c check_map.c create_picture.c save_values.c moving.c check_tiles.c \
-events.c check_route.c ../gnl/get_next_line_utils.c ../gnl/get_next_line.c \
+SRC_FILES = main.c checks.c create_picture.c set_variable_count.c events.c \
+events.c key_press.c fill_free_map.c ../gnl/get_next_line_utils.c ../gnl/get_next_line.c \
 ../gnl/get_next_line.h ../libftprintf/libftprintf.a 
 
 OBJ_FILES = ${SRC_FILES:.c=.o}

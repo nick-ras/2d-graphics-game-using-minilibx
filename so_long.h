@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 09:49:19 by nickras           #+#    #+#             */
-/*   Updated: 2022/11/28 15:16:01 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/28 19:00:53 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ typedef struct s_map
 	int		moves;
 	void	*mlx_ptr;
 	void	*win_ptr;
-	// int		key_pressed;
 
 	int		img_hori;
 	int		img_vert;
@@ -70,41 +69,38 @@ typedef struct s_map
 	void	*collectible_pic;
 	void	*door_pic;
 	void	*player_pic;
-	void	*winner_pic;
+	void	*finish_pic;
+	int		esc;
 }	t_map;
-
 
 void	check_squares(t_map *grid);
 void	start(t_map *grid, int row_count, int col_count);
 void	door(t_map *grid, int row_count, int col_count);
 void	collectibles(t_map *grid, int row_count, int col_count);
+void	init_map(t_map *grid);
 
-void	check_and_malloc(t_map *grid, char *argv);
 void	filename_check(char *map);
 void	check_valid_route(t_map *grid);
 void	char_check(t_map *data, int i, int j);
 void	wall_check(t_map *data);
+int		dfs(t_map *grid, int count_row, int count_col, int door);
 
-int		main(int argc, char *argv[]);
+int		get_fd(char *argv);
+void	check_and_malloc(t_map *grid, char *argv);
 void	fill_map(t_map *grid, char *argv);
 void	fill_map2(t_map *grid, char *argv);
-void	set_columns(t_map *grid, char *line_as_str);
-
-int		dfs(t_map *grid, int count_row, int count_col, int door);
 int		free_map(t_map *map, int exit_func);
-int		get_fd(char *argv);
-void	init_map(t_map *grid);
+
+void	check_ptr(t_map *map, void *ptr);
+void	set_columns(t_map *grid, char *line_as_str);
+int		main(int argc, char *argv[]);
+
 int		no_event(void *data);
+int		update_window(t_map *map);
 
 void	set_picture_pointers(t_map *render);
 void	put_images_on_picture_nested(t_map *data, int i, int j);
 void	put_images_on_picture(t_map *data);
-// void	put_part_images_on_picture(t_map *data);
-int 	update_window(t_map *map);
-
-void	result(t_map *data);
-void	check_ptr(t_map *map, void *ptr);
-void	update_pixel(t_map *data, int i, int j);
 
 int		key_press(int keycode, t_map *data);
 void	move_w(t_map *data);

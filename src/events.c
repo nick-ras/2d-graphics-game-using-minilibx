@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:20:11 by nick              #+#    #+#             */
-/*   Updated: 2022/11/27 17:59:27 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/28 19:00:04 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,45 +18,16 @@ int	no_event(void *map)
 	return (EXIT_SUCCESS);
 }
 
-void	result(t_map *map)
+int	update_window(t_map *map)
 {
 	mlx_clear_window(map->mlx_ptr, map->win_ptr);
-	mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->winner_pic,
-		map->columns * 40 / 2.4, map->rows * 40 / 4);
-}
-
-int	free_map(t_map *map, int exit_func)
-{
-	int	i;
-
-	i = 0;
-	while (i < map->rows)
+	put_images_on_picture(map);
+	if (map->won_game == 1 || map->moves < 1 || map->esc)
 	{
-		if (map->map[i] != NULL)
-			free(map->map[i]);
-		if (map->map[i] != NULL)
-			free(map->map2[i]);
-		i++;
+		free_map(map, 0);
+		mlx_clear_window(map->mlx_ptr, map->win_ptr);
+		mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, \
+		map->finish_pic, map->columns * 40, map->rows * 40);
 	}
-	free(map->map);
-	free(map->map2);
-	if (map->mlx_ptr || map->win_ptr)
-		mlx_destroy_window(map->mlx_ptr, map->win_ptr);
-	free(map);
-	if (exit_func)
-	{
-		ft_printf("exits program with error\n");
-		exit(EXIT_FAILURE);
-	}
-	exit(EXIT_SUCCESS);
-}
-
-void	check_ptr(t_map *map, void *ptr)
-{
-	if (ptr == NULL)
-	{
-		free(ptr);
-		ft_printf("map->win_ptr error\n");
-		free_map(map, 1);
-	}
+	return (0);
 }
