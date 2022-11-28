@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 09:49:19 by nickras           #+#    #+#             */
-/*   Updated: 2022/11/28 19:00:53 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/28 20:26:23 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,9 @@ void	check_and_malloc(t_map *grid, char *argv);
 void	fill_map(t_map *grid, char *argv);
 void	fill_map2(t_map *grid, char *argv);
 int		free_map(t_map *map, int exit_func);
+int		free_map2(t_map *map);
 
+void	check_rows(t_map *map);
 void	check_ptr(t_map *map, void *ptr);
 void	set_columns(t_map *grid, char *line_as_str);
 int		main(int argc, char *argv[]);

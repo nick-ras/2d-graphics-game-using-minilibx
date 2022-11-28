@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 18:50:33 by nick              #+#    #+#             */
-/*   Updated: 2022/11/28 18:51:39 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/28 20:22:42 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	init_map(t_map *map)
 {
 	if (!map)
 	{
+		ft_printf("Error\n");
 		ft_printf("could not malloc\n");
 		exit(EXIT_FAILURE);
 	}
@@ -37,6 +38,7 @@ void	start(t_map *map, int i, int j)
 	{
 		if (map->count_start != 0)
 		{
+			ft_printf("Error\n");
 			ft_printf("too many entrances\n");
 			free_map(map, 1);
 		}
@@ -52,6 +54,7 @@ void	door(t_map *map, int i, int j)
 	{
 		if (map->door_count != 0)
 		{
+			ft_printf("Error\n");
 			ft_printf("too many doors\n");
 			free_map(map, 1);
 		}
@@ -89,7 +92,8 @@ void	check_squares(t_map *map)
 	}
 	if (map->door_count < 1 || map->count_start < 1 || map->collectibles < 1)
 	{
-		ft_printf("missing values, could ne start, door or collectible.");
+		ft_printf("Error\n");
+		ft_printf("missing values, could not start, door or collectible.");
 		free_map(map, 1);
 	}
 }

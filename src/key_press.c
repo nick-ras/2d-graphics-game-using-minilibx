@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:11:02 by lshonta           #+#    #+#             */
-/*   Updated: 2022/11/28 18:52:13 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/28 20:47:10 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,10 @@ void	move_a(t_map *map)
 int	key_press(int keycode, t_map *map)
 {
 	if (keycode == ESC)
+	{
 	 	map->esc = 1;
+		ft_printf("ESCAPE PRESSED\n");
+	}
 	if (keycode == UP)
 	 	move_w(map);
 	else if (keycode == LEFT)
@@ -114,23 +117,23 @@ int	key_press(int keycode, t_map *map)
 	else if (keycode == RIGHT)
 		move_d(map);
 	ft_printf("x = keycode %d %d y = %d lst pos %c collectibles %d moves %d\n", keycode, map->start_pos[0], map->start_pos[1], map->lst_pos, map->collectibles, map->moves);
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (i < map->rows)
-	{
-		j = 0;
-		while (map->map[i][j])
-		{
-			printf("%c", map->map[i][j]);
-			j++;
-		}
-		printf("\n");
-		i++;
-	}
+	
 	return (0);
 }
 
+// int	i;
+// 	int	j;
 
+// 	i = 0;
+// 	j = 0;
+// 	while (i < map->rows)
+// 	{
+// 		j = 0;
+// 		while (map->map[i][j])
+// 		{
+// 			printf("%c", map->map[i][j]);
+// 			j++;
+// 		}
+// 		printf("\n");
+// 		i++;
+// 	}
