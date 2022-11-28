@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 09:49:19 by nickras           #+#    #+#             */
-/*   Updated: 2022/11/28 10:17:01 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/28 15:16:01 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ typedef struct s_map
 	char	**map2;
 	char	lst_pos;
 	int		collectibles;
-	int		player_on_exit;
-	int		count_down_steps;
+	int		won_game;
+	int		moves;
 	void	*mlx_ptr;
 	void	*win_ptr;
 	// int		key_pressed;

@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:33:43 by nick              #+#    #+#             */
-/*   Updated: 2022/11/27 18:32:20 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/28 15:16:01 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	init_map(t_map *map)
 	map->start_pos[1] = 0;
 	map->exit_pos[0] = 0;
 	map->exit_pos[1] = 0;
-	map->player_on_exit = 0;
-	map->count_down_steps = 20;
+	map->won_game = 0;
+	map->moves = 20;
 	map->lst_pos = '0';
 }
 

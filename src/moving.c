@@ -6,73 +6,144 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:11:02 by lshonta           #+#    #+#             */
-/*   Updated: 2022/11/28 10:26:12 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/28 18:19:22 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void put_last_pos(t_map *map)
+void	put_last_pos(t_map *map)
 {
-	if (map->lst_pos == 'D' && map->count_down_steps > 0)
-	{
-		//mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, EXIT, \
-		map->start_pos[0]  * 40, map->start_pos[1]  * 40);
-		map->map[map->start_pos[0] - 1][map->start_pos[1]] = 'E';
-	}
-	else if (map->lst_pos == 'C' || map->lst_pos == '0' )
-	{
-		//mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, EMPTY_SPACE, \
-		map->start_pos[0]  * 40, map->start_pos[1]  * 40);
-		map->map[map->start_pos[0] - 1][map->start_pos[1]] = '0';
-	}
+	if (map->lst_pos == 'D')
+		map->map[map->start_pos[0]][map->start_pos[1]] = 'D';
+	else
+		map->map[map->start_pos[0]][map->start_pos[1]] = '0';
+	ft_printf("in put_last_pos\n");
 }
+
 void	move_w(t_map *map)
 {
 	if (map->map[map->start_pos[0] - 1][map->start_pos[1]] == '1')
 		return ;
+	if (map->map[map->start_pos[0] - 1][map->start_pos[1]] == 'D' \
+	&& map->collectibles < 1)
+		map->won_game = 1;
 	if (map->map[map->start_pos[0] - 1][map->start_pos[1]] == 'C')
-	{
-		//mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, PLAYER, \
-		(map->start_pos[0] - 1)  * 40, map->start_pos[1]  * 40);
-		map->map[map->start_pos[0] - 1][map->start_pos[1]] = 'P';
-		put_last_pos(map);
 		map->collectibles--;
-	}
-	// else if (map->map[map->start_pos[0] - 1][map->start_pos[1]] == '0')
-	// {
-	// 	map->map[map->start_pos[0]][map->start_pos[1]] = '0';
-	// 	map->map[map->start_pos[0] - 1][map->start_pos[1]] = 'P';
-	// }
-	// else if (map->map[map->start_pos[0] - 1][map->start_pos[1]] == 'E' \
-	// 	&& map->step_count == 0)
-	// 	map->player_on_exit = 1;
-	map->start_pos[0] = map->start_pos[0] - 1;
-	map->count_down_steps--;
+	else if (map->map[map->start_pos[0] - 1][map->start_pos[1]] == 'D' \
+		&& map->collectibles > 0)
+		map->lst_pos = 'D';
+	ft_printf("before update\n");
+	put_last_pos(map);
+	map->start_pos[0]--;
+	map->map[map->start_pos[0]][map->start_pos[1]] = 'P';
+	map->moves--;
 }
+
+void	move_s(t_map *map)
+{
+	if (map->map[map->start_pos[0] + 1][map->start_pos[1]] == '1')
+		return ;
+	if (map->map[map->start_pos[0] + 1][map->start_pos[1]] == 'D' \
+	&& map->collectibles < 1)
+		map->won_game = 1;
+	if (map->map[map->start_pos[0] + 1][map->start_pos[1]] == 'C')
+		map->collectibles--;
+	else if (map->map[map->start_pos[0] + 1][map->start_pos[1]] == 'D' \
+		&& map->collectibles > 0)
+		map->lst_pos = 'D';
+	ft_printf("before update\n");
+	put_last_pos(map);
+	map->start_pos[0]++;
+	map->map[map->start_pos[0]][map->start_pos[1]] = 'P';
+	map->moves--;
+}
+
+void	move_d(t_map *map)
+{
+	if (map->map[map->start_pos[0]][map->start_pos[1] + 1] == '1')
+		return ;
+	if (map->map[map->start_pos[0]][map->start_pos[1] + 1] == 'D' \
+	&& map->collectibles < 1)
+		map->won_game = 1;
+	if (map->map[map->start_pos[0]][map->start_pos[1] + 1] == 'C')
+		map->collectibles--;
+	else if (map->map[map->start_pos[0]][map->start_pos[1] + 1] == 'D' \
+		&& map->collectibles > 0)
+		map->lst_pos = 'D';
+	ft_printf("before update\n");
+	put_last_pos(map);
+	map->start_pos[1]++;
+	map->map[map->start_pos[0]][map->start_pos[1]] = 'P';
+	map->moves--;
+}
+
+void	move_a(t_map *map)
+{
+	if (map->map[map->start_pos[0]][map->start_pos[1] - 1] == '1')
+		return ;
+	if (map->map[map->start_pos[0]][map->start_pos[1] - 1] == 'D' \
+	&& map->collectibles < 1)
+		map->won_game = 1;
+	if (map->map[map->start_pos[0]][map->start_pos[1] - 1] == 'C')
+		map->collectibles--;
+	else if (map->map[map->start_pos[0]][map->start_pos[1] - 1] == 'D' \
+		&& map->collectibles > 0)
+		map->lst_pos = 'D';
+	ft_printf("before update\n");
+	put_last_pos(map);
+	map->start_pos[1]--;
+	map->map[map->start_pos[0]][map->start_pos[1]] = 'P';
+	map->moves--;
+}
+
+
+// 	mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, PLAYER, \
+// (map->start_pos[0] - 1)  * 40, map->start_pos[1]  * 40);
 
 int	key_press(int keycode, t_map *map)
 {
-	ft_printf("in key_press keycode = %d\n", keycode);
-	ft_printf("x = %d y = %d\n", map->start_pos[0], map->start_pos[1]);
-	// if (keycode == ESC)
-	// 	free_map(map, 0);
-	// if (keycode == UP)
-	// 	move_w(map);
-	// else if (keycode == LEFT)
-	// 	move_a(map);
-	// else if (keycode == DOWN)
-	// 	move_s(map);
-	// else if (keycode == RIGHT)
-	// 	move_d(map);
-	ft_printf("in key_press end keycdoe\n");
+	if (keycode == ESC)
+	 	free_map(map, 0);
+	if (keycode == UP)
+	 	move_w(map);
+	else if (keycode == LEFT)
+		move_a(map);
+	else if (keycode == DOWN)
+		move_s(map);
+	else if (keycode == RIGHT)
+		move_d(map);
+	ft_printf("x = keycode %d %d y = %d lst pos %c collectibles %d moves %d\n", keycode, map->start_pos[0], map->start_pos[1], map->lst_pos, map->collectibles, map->moves);
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < map->rows)
+	{
+		j = 0;
+		while (map->map[i][j])
+		{
+			printf("%c", map->map[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
 	return (0);
 }
 
 int update_window(t_map *map)
 {
-	//mlx_clear_window(map->mlx_ptr, map->win_ptr);
-	//put_images_on_picture(map);
-	
+	mlx_clear_window(map->mlx_ptr, map->win_ptr);
+	put_images_on_picture(map);
+	if (map->won_game == 1)
+		result(map);
+	if (map->moves < 1)
+	{
+		printf("you lost\n");
+		mlx_clear_window(map->mlx_ptr, map->win_ptr);
+		free_map(map, 0);
+	}
 	return (0);
 }
