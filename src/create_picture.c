@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 17:59:53 by lshonta           #+#    #+#             */
-/*   Updated: 2022/11/28 18:55:34 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/28 22:45:38 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	put_images_on_picture(t_map *map)
 	while (i < map->rows)
 	{
 		j = 0;
-		while (map->map[i][j])
+		while (map->map[i][j] != '\n' && map->map[i][j] != '\0')
 		{
 			put_images_on_picture_nested(map, i, j);
 			j++;

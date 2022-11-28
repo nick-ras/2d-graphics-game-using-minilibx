@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:20:11 by nick              #+#    #+#             */
-/*   Updated: 2022/11/28 22:05:12 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/28 22:38:48 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	no_event(void *map)
 int	update_window(t_map *map)
 {
 	mlx_clear_window(map->mlx_ptr, map->win_ptr);
+	//mlx_destroy_window(map->mlx_ptr, map->win_ptr);
 	if (map->esc)
 	{
 		free_map(map, 0);
@@ -33,4 +34,3 @@ int	update_window(t_map *map)
 		put_images_on_picture(map);
 	return (0);
 }
-//free_map(map, 0);
