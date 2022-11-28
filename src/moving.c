@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:11:02 by lshonta           #+#    #+#             */
-/*   Updated: 2022/11/27 19:24:31 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/28 10:26:12 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ void	move_w(t_map *map)
 int	key_press(int keycode, t_map *map)
 {
 	ft_printf("in key_press keycode = %d\n", keycode);
-	ft_printf("x = %d y = %d\n", &map->start_pos[0], &map->start_pos[1]);
-	if (keycode == ESC)
-		free_map(map, 0);
-	if (keycode == UP)
-		move_w(map);
+	ft_printf("x = %d y = %d\n", map->start_pos[0], map->start_pos[1]);
+	// if (keycode == ESC)
+	// 	free_map(map, 0);
+	// if (keycode == UP)
+	// 	move_w(map);
 	// else if (keycode == LEFT)
 	// 	move_a(map);
 	// else if (keycode == DOWN)
@@ -71,6 +71,8 @@ int	key_press(int keycode, t_map *map)
 
 int update_window(t_map *map)
 {
-	mlx_clear_window(map->mlx_ptr, map->win_ptr);
-	put_images_on_picture(map);
+	//mlx_clear_window(map->mlx_ptr, map->win_ptr);
+	//put_images_on_picture(map);
+	
+	return (0);
 }

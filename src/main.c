@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:20:33 by nick              #+#    #+#             */
-/*   Updated: 2022/11/27 19:18:59 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/28 10:23:05 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,9 @@ void	set_picture_pointers(t_map *map)
 			COLLECT, &img_width, &img_height);
 	map->winner_pic = mlx_xpm_file_to_image(map->mlx_ptr,
 			WIN, &img_width, &img_height);
+	map->img_vert = img_height;
+	map->img_hori = img_width;
+	ft_printf("vert %d hori %d\n", map->img_vert, map->img_hori);
 }
 
 void	check_and_malloc(t_map *map, char *argv)
@@ -138,10 +141,10 @@ int	main(int argc, char *argv[])
 	set_picture_pointers(map);
 	put_images_on_picture(map);
 	mlx_hook(map->win_ptr, KEYPRESS_EXIT, (1L << 2), no_event, &map);
-	mlx_hook(map->win_ptr, KEYPRESS_EVENT, (1L << 0), key_press, &map); //handles all inputs
-	//mlx_loop_hook(map->mlx_ptr, update_window, &map);
-	mlx_loop(map->mlx_ptr); //Keeps the program running
-	free_map(map, 0);
+	mlx_hook(map->win_ptr, KEYPRESS_EVENT, (1L << 0), key_press, &map);
+	mlx_loop_hook(map->mlx_ptr, update_window, &map);
+	mlx_loop(map->mlx_ptr);
+	// free_map(map, 0);
 	return (0);
 }
 

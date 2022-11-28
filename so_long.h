@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 09:49:19 by nickras           #+#    #+#             */
-/*   Updated: 2022/11/27 18:57:58 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/28 10:17:01 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <X11/extensions/shm.h>
 # include <X11/Xlib.h>
 # include <X11/keysym.h>
+# include <X11/X.h>
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdio.h>
@@ -62,6 +63,8 @@ typedef struct s_map
 	void	*win_ptr;
 	// int		key_pressed;
 
+	int		img_hori;
+	int		img_vert;
 	void	*wall_pic;
 	void	*space_pic;
 	void	*collectible_pic;
