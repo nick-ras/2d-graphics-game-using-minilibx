@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:20:33 by nick              #+#    #+#             */
-/*   Updated: 2022/11/29 11:00:04 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/29 11:38:55 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	check_rows(t_map *map)
 	{
 		ft_printf("Error\n");
 		ft_printf("not enough rows or columns or map is not a rectangle");
-		free_map(map, 1);
+		free_map(map, 0);
 	}
 }
 
@@ -30,7 +30,7 @@ void	check_ptr(t_map *map, void *ptr)
 		free(ptr);
 		ft_printf("Error\n");
 		ft_printf("map->win_ptr doesnt work\n");
-		free_map(map, 1);
+		free_map(map, 0);
 	}
 }
 
@@ -43,7 +43,7 @@ int	get_fd(char *argv)
 	{
 		ft_printf("Error\n");
 		ft_printf("fd error from first open\n");
-		exit (1);
+		exit (0);
 	}
 	return (fd);
 }
@@ -56,7 +56,6 @@ void	set_columns(t_map *map, char *line_as_str)
 	while (line_as_str[i] != '\n' && line_as_str[i] != '\0')
 		i++;
 	map->columns = i;
-	ft_printf("Error\n");
 	ft_printf("map->columns %d\n", map->columns);
 }
 
@@ -86,6 +85,5 @@ int	main(int argc, char *argv[])
 	mlx_hook(map->win_ptr, KEYPRESS_EVENT, (1L << 0), key_press, map);
 	mlx_loop_hook(map->mlx_ptr, update_window, map);
 	mlx_loop(map->mlx_ptr);
-	free_map(map, 0);
 	return (0);
 }
