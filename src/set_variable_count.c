@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 18:50:33 by nick              #+#    #+#             */
-/*   Updated: 2022/11/28 20:22:42 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/29 15:45:49 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	start(t_map *map, int i, int j)
 		{
 			ft_printf("Error\n");
 			ft_printf("too many entrances\n");
-			free_map(map, 1);
+			free_map2(map);
+			free_map(map, 0);
 		}
 		map->start_pos[0] = i;
 		map->start_pos[1] = j;
@@ -56,7 +57,8 @@ void	door(t_map *map, int i, int j)
 		{
 			ft_printf("Error\n");
 			ft_printf("too many doors\n");
-			free_map(map, 1);
+			free_map2(map);
+			free_map(map, 0);
 		}
 		map->exit_pos[0] = i;
 		map->exit_pos[1] = j;
@@ -90,10 +92,11 @@ void	check_squares(t_map *map)
 		}
 		i++;
 	}
-	if (map->door_count < 1 || map->count_start < 1 || map->collectibles < 1)
+	if (map->door_count < 1 || map->count_start < 1 || map->collectibles < 0)
 	{
 		ft_printf("Error\n");
 		ft_printf("missing values, could not start, door or collectible.");
-		free_map(map, 1);
+		free_map2(map);
+		free_map(map, 0);
 	}
 }

@@ -6,7 +6,7 @@
 #    By: nick <nick@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 10:21:39 by nickras           #+#    #+#              #
-#    Updated: 2022/11/29 14:33:38 by nick             ###   ########.fr        #
+#    Updated: 2022/11/29 15:23:20 by nick             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,20 +25,20 @@ OBJ_DIR =   ./obj/
 
 
 SRC_FILES = main.c checks.c create_picture.c set_variable_count.c events.c \
-key_press.c fill_free_map.c ../gnl/get_next_line_utils.c ../gnl/get_next_line.c \
-../gnl/get_next_line.h free_memory.c 
-#../libftprintf/libftprintf.a 
+key_press.c fill_map.c ../gnl/get_next_line_utils.c ../gnl/get_next_line.c \
+../gnl/get_next_line.h free_memory.c ../libftprintf/libftprintf.a 
 
 OBJ_FILES = ${SRC_FILES:.c=.o}
 SRC			= $(addprefix $(SRC_DIR),$(SRC_FILES))
 OBJ			= $(addprefix $(OBJ_DIR),$(OBJ_FILES))
 
 ${NAME}: ${OBJ} $(LIBFTPRINTF_A)
-			${CC} -o ${NAME} ${CFLAG} ${OBJ}  $(MLX_FLAGS) ${LIBFTPRINTF_A}
+			${CC} -o ${NAME} ${CFLAG} ${OBJ}  $(MLX_FLAGS) 
+# ${LIBFTPRINTF_A}
 all: ${NAME}
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-			$(MAKE) all -C $(LIBFTPRINTF_PATH)
+#			$(MAKE) all -C $(LIBFTPRINTF_PATH)
 			mkdir -p $(OBJ_DIR)
 			${CC} ${CFLAG} -o $@ -c $^
 
@@ -47,7 +47,7 @@ clean:
 
 fclean: clean
 			$(RM) ${NAME}
-			make fclean -C $(LIBFTPRINTF_PATH)
+#			make fclean -C $(LIBFTPRINTF_PATH)
 
 re: fclean all
 

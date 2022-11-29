@@ -6,11 +6,29 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:33:43 by nick              #+#    #+#             */
-/*   Updated: 2022/11/28 20:23:13 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/29 15:42:02 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
+
+void	wall_check2(t_map *map)
+{
+	int	i;
+
+	i = 0;
+	while (i < map->columns - 1)
+	{
+		if (map->map[0][i] != '1' || map->map[map->rows - 1][i] != '1')
+		{
+			ft_printf("Error\n");
+			ft_printf("Error vertical walls ");
+			free_map2(map);
+			free_map(map, 1);
+		}
+		i++;
+	}
+}
 
 void	wall_check(t_map *map)
 {
@@ -23,21 +41,12 @@ void	wall_check(t_map *map)
 		{
 			ft_printf("Error\n");
 			ft_printf("Error horisontal walls\n");
+			free_map2(map);
 			free_map(map, 1);
 		}
 		i++;
 	}
-	i = 0;
-	while (i < map->columns - 1)
-	{
-		if (map->map[0][i] != '1' || map->map[map->rows - 1][i] != '1')
-		{
-			ft_printf("Error\n");
-			ft_printf("Error vertical walls ");
-			free_map(map, 1);
-		}
-		i++;
-	}
+	wall_check2(map);
 }
 
 void	char_check(t_map *map, int i, int j)
@@ -48,7 +57,8 @@ void	char_check(t_map *map, int i, int j)
 	{
 		ft_printf("Error\n");
 		ft_printf("There are invalid characters in map\n");
-		free_map(map, 1);
+		free_map2(map);
+		free_map(map, 0);
 	}
 }
 
@@ -59,7 +69,8 @@ int	dfs(t_map *map, int count_row, int count_col, int door)
 	{
 		ft_printf("Error\n");
 		ft_printf("missing barrier\n");
-		free_map(map, 1);
+		free_map2(map);
+		free_map(map, 0);
 	}
 	if (map->map2[count_row][count_col] == '1')
 		return (door);
@@ -79,12 +90,6 @@ void	check_valid_route(t_map *map)
 
 	door = 0;
 	door = dfs(map, map->start_pos[0], map->start_pos[1], door);
-	if (door < 0)
-	{
-		ft_printf("Error\n");
-		ft_printf("missing barrier(s)\n");
-		free_map(map, 1);
-	}
 	if (door < 1)
 	{
 		ft_printf("Error\n");

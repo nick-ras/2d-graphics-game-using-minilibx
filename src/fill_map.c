@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill_free_map.c                                    :+:      :+:    :+:   */
+/*   fill_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 23:19:38 by lshonta           #+#    #+#             */
-/*   Updated: 2022/11/29 13:05:29 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/29 15:35:19 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,6 @@ void	fill_map2(t_map *map, char *argv)
 	while (row_count < map->rows)
 	{
 		map->map2[row_count] = get_next_line(fd2);
-		if (map->map2[row_count] == NULL)
-		{
-			ft_printf("Error\n");
-			ft_printf("rows is NULL\n");
-			free_map(map, 0);
-		}	
 		row_count++;
 	}
 	close(fd2);
@@ -80,7 +74,9 @@ void	check_and_malloc(t_map *map, char *argv)
 		{
 			ft_printf("Error\n");
 			ft_printf("line not same length as start line\n");
-			free_map(map, 0);
+			free(line_as_str);
+			free(map);
+			exit (1);
 		}
 		free(line_as_str);
 		line_as_str = get_next_line(fd);

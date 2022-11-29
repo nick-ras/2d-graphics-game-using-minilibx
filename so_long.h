@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 09:49:19 by nickras           #+#    #+#             */
-/*   Updated: 2022/11/29 12:34:54 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/29 15:41:40 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	filename_check(char *map);
 void	check_valid_route(t_map *grid);
 void	char_check(t_map *data, int i, int j);
 void	wall_check(t_map *data);
+void	wall_check2(t_map *map);
 int		dfs(t_map *grid, int count_row, int count_col, int door);
 
 int		get_fd(char *argv);
