@@ -10,27 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/* Function name ft_substr
-Prototype char *ft_substr(char const *s, unsigned int start,
-size_t len);
-Turn in files -
-Parameters s: The string from which to create the substring.
-start: The start index of the substring in the
-string ’s’.
-len: The maximum length of the substring.
-Return value The substring.
-NULL if the allocation fails.
-External functs. malloc
-Description Allocates (with malloc(3)) and returns a substring
-from the string ’s’.
-The substring begins at index ’start’ and is of
-maximum size ’len’. 
-gcc -Wall -Werror -Wextra ft_substr.c ft_strlen.c 
-ft_memcpy.c ft_strdup.c && ./a.out
-*/
-
 #include "libft.h"
 
+//My own implementation of the C library function 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*target;

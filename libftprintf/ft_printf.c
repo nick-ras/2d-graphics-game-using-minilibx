@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nickras <nickras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 15:55:54 by nickras           #+#    #+#             */
-/*   Updated: 2022/05/31 18:20:51 by nickras          ###   ########.fr       */
+/*   Updated: 2022/11/29 13:19:32 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
 #include "ft_printf.h"
 
 //This function detects what kind of conversion it needs to do and sends it to
-//the right subfunction. The subfunction write to stdout, and return the amount of bytes it wrote in stdout
+//the right subfunction. The subfunction write to stdout, and return the amount 
+//of bytes it wrote in stdout
 int	handler(const char *s, int i, va_list args)
 {
 	int	length;
@@ -41,10 +41,11 @@ int	handler(const char *s, int i, va_list args)
 	return (length);
 }
 
-//This functions is the starting function. It does mostly the same as the original printf
-//but use write statement. 
-//It takes a string and a variable amount of command line argument. Everytime there is a "%"
-//in the string, it will go into subfunction that handles conversions and write to stdout, just like
+//This functions is the starting function. It does mostly the same as 
+// the original printf but use write statement. 
+// It takes a string and a variable amount of command line argument. 
+// Everytime there is a "%" in the string, it will go into subfunction that 
+// handles conversions and write to stdout, just like
 //in printf (see man)
 int	ft_printf(const char *s, ...)
 {

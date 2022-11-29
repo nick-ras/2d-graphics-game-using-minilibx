@@ -12,6 +12,7 @@
 
 #include "libft.h"
 
+//My own implementation of the C library function 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
 	size_t			i;

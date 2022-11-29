@@ -12,6 +12,7 @@
 
 #include "libft.h"
 
+//My own implementation of the C library function 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
 	size_t			i;

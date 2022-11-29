@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+//My own implementation of the C library function 
 int	ft_tolower(int c)
 {
 	if (c >= 65 && c <= 90)

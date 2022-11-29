@@ -3,27 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nickras <nickras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 23:15:24 by nrasmuss          #+#    #+#             */
-/*   Updated: 2022/05/18 12:04:15 by nickras          ###   ########.fr       */
+/*   Updated: 2022/11/29 14:32:20 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* Function name ft_strjoin
-Prototype char *ft_strjoin(char const *s1, char const *s2);
-Turn in files -
-Parameters s1: The prefix string.
-s2: The suffix string.
-Return value The new string.
-NULL if the allocation fails.
-External functs. malloc
-Description Allocates (with malloc(3)) and returns a new
-string, which is the result of the concatenation
-of ’s1’ and ’s2’. */
-
 #include "libft.h"
 
+//My own implementation of the C library function 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char		*concat;

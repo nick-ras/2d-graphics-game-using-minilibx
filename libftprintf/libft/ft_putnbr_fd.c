@@ -10,14 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/* gcc -Werror -Wall -Wextra -g
-ft_putnbr_fd.c 
-ft_strtrim.c ft_strlen.c ft_itoa.c
-ft_bzero.c
-ft_strdup.c ft_substr.c && ./a.out */
-
 #include "libft.h"
 
+//writes a number to a filedescriptor by converting it to ascii value
+//so i can use write function to write them into filescriptor
 void	ft_putnbr_fd(int n, int fd)
 {
 	unsigned int	ui;

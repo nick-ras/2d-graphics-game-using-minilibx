@@ -12,6 +12,7 @@
 
 #include "libft.h"
 
+//My own implementation of the C library function 
 size_t	ft_strlen(const char *s)
 {
 	size_t	count;

@@ -12,6 +12,7 @@
 
 #include "libft.h"
 
+//My own implementation of the C library function 
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	unsigned int	i;

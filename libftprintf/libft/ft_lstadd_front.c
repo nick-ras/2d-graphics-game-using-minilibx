@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+
+//adds node to the end of a linked list
 /* Parameters lst: The address of a pointer to the first link of
 a list.
 new: The address of a pointer to the node to be

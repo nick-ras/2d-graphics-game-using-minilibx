@@ -12,6 +12,7 @@
 
 #include "libft.h"
 
+//writes a string to a filedescriptor
 void	ft_putendl_fd(char *s, int fd)
 {
 	size_t	length;

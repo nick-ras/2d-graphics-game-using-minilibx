@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+//My own implementation of the C library function 
 int	ft_isdigit(int i)
 {
 	if (i >= '0' && i <= '9')

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handlers.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nickras <nickras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 14:40:30 by nickras           #+#    #+#             */
-/*   Updated: 2022/06/03 12:22:40 by nickras          ###   ########.fr       */
+/*   Updated: 2022/11/29 13:18:43 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	handle_char(int i)
 int	handle_string(char *str)
 {
 	if (!str)
-		return (write(1, "(null)", 6)); 
+		return (write(1, "(null)", 6));
 	return (write(1, str, ft_strlen(str)));
 }
 

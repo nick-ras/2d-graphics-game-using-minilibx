@@ -12,6 +12,7 @@
 
 #include "libft.h"
 
+//My own implementation of the C library function 
 char	*ft_strrchr(const char *s, int c)
 {
 	int	length;

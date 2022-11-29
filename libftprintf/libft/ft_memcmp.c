@@ -37,6 +37,7 @@ RETURN VALUES
 
 #include "libft.h"
 
+//My own implementation of the C library function 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
 	size_t	i;

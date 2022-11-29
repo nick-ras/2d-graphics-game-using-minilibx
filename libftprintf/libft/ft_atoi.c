@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+//My own implementation of the C library function 
 int	ft_atoi(const char *str)
 {
 	int			sign;

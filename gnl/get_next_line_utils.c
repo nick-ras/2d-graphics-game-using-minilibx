@@ -10,20 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "get_next_line.h"
 
 //does the same as strlen function - see man
-// size_t	ft_strlen(const char *s)
-// {
-// 	size_t	count;
+size_t	ft_strlen(const char *s)
+{
+	size_t	count;
 
-// 	count = 0;
-// 	while (s[count] != '\0')
-// 	{
-// 		count++;
-// 	}
-// 	return (count);
-// }
+	count = 0;
+	while (s[count] != '\0')
+	{
+		count++;
+	}
+	return (count);
+}
 
 //does the same as strchr function - see man
 char	*ft_strchr(const char *s, int c)

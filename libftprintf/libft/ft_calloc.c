@@ -12,6 +12,7 @@
 
 #include "libft.h"
 
+//My own implementation of the C library function 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
 	void	*ptr;

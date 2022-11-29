@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+//My own implementation of the C library function 
 int	ft_isascii(int i)
 {
 	if (i >= 0 && i <= 127)

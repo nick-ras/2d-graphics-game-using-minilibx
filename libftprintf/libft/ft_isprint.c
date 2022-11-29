@@ -13,6 +13,7 @@
 #include <ctype.h>
 #include <stdio.h>
 
+//My own implementation of the C library function 
 int	ft_isprint(int c)
 {
 	if (c >= 32 && c < 127)

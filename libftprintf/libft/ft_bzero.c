@@ -12,6 +12,7 @@
 
 #include "libft.h"
 
+//My own implementation of the C library function 
 void	ft_bzero(void *s, size_t n)
 {
 	while (n--)

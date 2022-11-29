@@ -12,6 +12,7 @@
 
 #include "libft.h"
 
+// writes length of string to filescriptor
 void	ft_putstr_fd(char *s, int fd)
 {
 	size_t	length;
@@ -22,11 +23,3 @@ void	ft_putstr_fd(char *s, int fd)
 		write(fd, s, length);
 	}
 }
-
-/* int	main(void)
-{
-	char s[] = "   lorem\nipsum\rdolor\tsit amet   ";
-
-	ft_putstr_fd(s, 1);
-	return (0);
-} */

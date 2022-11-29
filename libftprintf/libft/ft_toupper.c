@@ -12,6 +12,7 @@
 
 #include "libft.h"
 
+//My own implementation of the C library function 
 int	ft_toupper(int c)
 {
 	if (c >= 97 && c <= 122)

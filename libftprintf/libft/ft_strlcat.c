@@ -14,6 +14,7 @@
 
 #include "libft.h"
 
+//My own implementation of the C library function 
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
 	size_t	count;

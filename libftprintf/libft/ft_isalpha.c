@@ -12,6 +12,7 @@
 
 #include "libft.h"
 
+//My own implementation of the C library function 
 int	ft_isalpha(int c)
 {
 	if (c >= 'a' && c <= 'z')

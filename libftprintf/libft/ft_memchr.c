@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/* The  memchr()  function scans the initial n 
+/* From manual: The  memchr()  function scans the initial n 
 bytes of the memory area
  pointed to by s for the first instance ofc.  Both c and the bytes of 
  the memory area pointed to by s are interpreted as unsigned char.
@@ -21,6 +21,7 @@ occur in the given memory area.
 
 #include "libft.h"
 
+//My own implementation of the C library function 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
 	size_t			i;
@@ -37,6 +38,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	return (NULL);
 }
 
+//testing
 /* int	main(void)
 {
 	char s[] = {0, 1, 2 ,3 ,4 ,5};

@@ -14,6 +14,7 @@
 
 #include "libft.h"
 
+//My own implementation of the C library function 
 static int	count_length(int n)
 {
 	int	i;
