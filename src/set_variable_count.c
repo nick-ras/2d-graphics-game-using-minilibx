@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 18:50:33 by nick              #+#    #+#             */
-/*   Updated: 2022/11/29 19:09:57 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/29 21:07:47 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	init_map(t_map *map)
 	map->exit_pos[0] = 0;
 	map->exit_pos[1] = 0;
 	map->won_game = 0;
-	map->moves = 20;
+	map->moves = 200;
 	map->lst_pos = '0';
 }
 
@@ -94,6 +94,7 @@ void	check_squares(t_map *map)
 	}
 	if (map->door_count < 1 || map->count_start < 1 || map->collectibles < 1)
 	{
+		ft_printf("COLL %d", map->collectibles);
 		ft_printf("Error\n");
 		ft_printf("missing values, could not start, door or collectible.");
 		free_map2(map);

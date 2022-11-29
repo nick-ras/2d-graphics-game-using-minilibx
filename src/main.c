@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:20:33 by nick              #+#    #+#             */
-/*   Updated: 2022/11/29 19:20:17 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/29 20:38:45 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	main(int argc, char *argv[])
 	map->mlx_ptr = mlx_init();
 	check_ptr(map, map->mlx_ptr);
 	map->win_ptr = mlx_new_window(map->mlx_ptr, map->columns * 40, \
-	map->rows * 40, "My window");
+	map->rows * 40, "My window"); //suppose to set 40 to the feedback but putwin
 	check_ptr(map, map->win_ptr);
 	set_picture_pointers(map);
 	mlx_hook(map->win_ptr, KEYPRESS_EXIT, (1L << 2), no_event, map);

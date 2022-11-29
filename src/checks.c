@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:33:43 by nick              #+#    #+#             */
-/*   Updated: 2022/11/29 19:21:48 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/29 23:05:15 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void	char_check(t_map *map, int i, int j)
 	&& map->map[i][j] != '0')
 	{
 		ft_printf("Error\n");
-		ft_printf("There are invalid characters in map\n");
+		ft_printf("There are invalid characters in map \
+		lines not same length\n");
 		free_map2(map);
 		free_map(map, 0);
 	}
