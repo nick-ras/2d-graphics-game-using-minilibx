@@ -6,29 +6,11 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:33:43 by nick              #+#    #+#             */
-/*   Updated: 2022/11/29 18:43:38 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/29 19:21:48 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
-
-void	wall_check2(t_map *map)
-{
-	int	i;
-
-	i = 0;
-	while (i < map->columns - 1)
-	{
-		if (map->map[0][i] != '1' || map->map[map->rows - 1][i] != '1')
-		{
-			ft_printf("Error\n");
-			ft_printf("Error vertical walls ");
-			free_map2(map);
-			free_map(map, 1);
-		}
-		i++;
-	}
-}
 
 void	wall_check(t_map *map)
 {

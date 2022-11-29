@@ -6,7 +6,7 @@
 #    By: nick <nick@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 10:21:39 by nickras           #+#    #+#              #
-#    Updated: 2022/11/29 19:14:03 by nick             ###   ########.fr        #
+#    Updated: 2022/11/29 19:22:13 by nick             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ OBJ_DIR =   ./obj/
 
 SRC_FILES = main.c checks.c create_picture.c set_variable_count.c events.c \
 key_press.c fill_map.c ../gnl/get_next_line_utils.c ../gnl/get_next_line.c \
-../gnl/get_next_line.h free_memory.c
+../gnl/get_next_line.h free_memory.c checks2.c
 
 OBJ_FILES = ${SRC_FILES:.c=.o}
 SRC			= $(addprefix $(SRC_DIR),$(SRC_FILES))

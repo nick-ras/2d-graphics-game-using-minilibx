@@ -6,33 +6,12 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:20:33 by nick              #+#    #+#             */
-/*   Updated: 2022/11/29 15:09:37 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/29 19:20:17 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 //make re  && ./a.out src/map.ber
-
-void	check_rows(t_map *map)
-{
-	if (map->rows < 4 || map->columns < 4 || map->rows == map->columns)
-	{
-		ft_printf("Error\n");
-		ft_printf("not enough rows or columns or map is not a rectangle");
-		free_map(map, 0);
-	}
-}
-
-void	check_ptr(t_map *map, void *ptr)
-{
-	if (ptr == NULL)
-	{
-		free(ptr);
-		ft_printf("Error\n");
-		ft_printf("map->win_ptr doesnt work\n");
-		free_map(map, 0);
-	}
-}
 
 int	get_fd(char *argv)
 {
