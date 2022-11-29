@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:20:33 by nick              #+#    #+#             */
-/*   Updated: 2022/11/29 12:32:55 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/29 13:05:10 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void	set_columns(t_map *map, char *line_as_str)
 	while (line_as_str[i] != '\n' && line_as_str[i] != '\0')
 		i++;
 	map->columns = i;
-	ft_printf("map->columns %d\n", map->columns);
 }
+//ft_printf("map->columns %d\n", map->columns);
 
 int	main(int argc, char *argv[])
 {

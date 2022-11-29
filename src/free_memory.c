@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 23:19:38 by lshonta           #+#    #+#             */
-/*   Updated: 2022/11/29 12:32:31 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/29 13:04:46 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	free_pictures(t_map *map)
 {
 	if (map->wall_pic)
 	{
-		ft_printf("PICTURE EXISTS\n");
 		mlx_destroy_image(map->mlx_ptr, map->finish_pic);
 		mlx_destroy_image(map->mlx_ptr, map->collectible_pic);
 		mlx_destroy_image(map->mlx_ptr, map->door_pic);
