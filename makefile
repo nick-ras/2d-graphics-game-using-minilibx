@@ -6,7 +6,7 @@
 #    By: nick <nick@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 10:21:39 by nickras           #+#    #+#              #
-#    Updated: 2022/11/28 19:03:54 by nick             ###   ########.fr        #
+#    Updated: 2022/11/29 12:32:43 by nick             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,14 +19,14 @@ MLX_FLAGS = -lmlx -lXext -lX11 -lm
 MAKE = make
 CC = gcc
 RM = rm -rf
-CFLAG = #-Wall -Werror -Wextra -g3
+CFLAG = -Wall -Werror -Wextra
 SRC_DIR = 	./src/
 OBJ_DIR =   ./obj/
 
 
 SRC_FILES = main.c checks.c create_picture.c set_variable_count.c events.c \
 key_press.c fill_free_map.c ../gnl/get_next_line_utils.c ../gnl/get_next_line.c \
-../gnl/get_next_line.h ../libftprintf/libftprintf.a 
+../gnl/get_next_line.h ../libftprintf/libftprintf.a free_memory.c
 
 OBJ_FILES = ${SRC_FILES:.c=.o}
 SRC			= $(addprefix $(SRC_DIR),$(SRC_FILES))

@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 09:49:19 by nickras           #+#    #+#             */
-/*   Updated: 2022/11/29 11:36:38 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/29 12:34:54 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@
 # define EXIT "./pictures/door.xpm"
 # define COLLECT "./pictures/collectible.xpm"
 # define WIN "./pictures/winner.xpm"
-# define ESC XK_Escape //65307
-# define LEFT XK_a //0x0061 //97
-# define RIGHT XK_d  //0xff53  // 0x0064 //100
-# define UP XK_w //0xff52 //0x0077 //119
-# define DOWN XK_s //0x0073 //115 
+# define ESC 65307
+# define LEFT 0x0061
+# define RIGHT 0x0064
+# define UP 0x0077
+# define DOWN 0x0073
 # define KEYPRESS_EVENT 2
 # define KEYPRESS_EXIT 17
 
@@ -89,9 +89,12 @@ int		get_fd(char *argv);
 void	check_and_malloc(t_map *grid, char *argv);
 void	fill_map(t_map *grid, char *argv);
 void	fill_map2(t_map *grid, char *argv);
+
 int		free_map(t_map *map, int after_window);
 int		free_map2(t_map *map);
+void	free_pictures(t_map *map);
 
+void	put_last_pos(t_map *map);
 void	check_rows(t_map *map);
 void	check_ptr(t_map *map, void *ptr);
 void	set_columns(t_map *grid, char *line_as_str);

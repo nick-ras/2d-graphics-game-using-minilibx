@@ -6,19 +6,11 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:11:02 by lshonta           #+#    #+#             */
-/*   Updated: 2022/11/28 22:52:08 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/29 12:33:45 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
-
-void	put_last_pos(t_map *map)
-{
-	if (map->lst_pos == 'D')
-		map->map[map->start_pos[0]][map->start_pos[1]] = 'D';
-	else
-		map->map[map->start_pos[0]][map->start_pos[1]] = '0';
-}
 
 void	move_w(t_map *map)
 {
@@ -92,39 +84,10 @@ void	move_a(t_map *map)
 	map->moves--;
 }
 
-
-// 	mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, PLAYER, \
-// (map->start_pos[0] - 1)  * 40, map->start_pos[1]  * 40);
-
-int	key_press(int keycode, t_map *map)
+void	put_last_pos(t_map *map)
 {
-	if (keycode == ESC)
-	 	map->esc = 1;
-	if (keycode == UP)
-	 	move_w(map);
-	else if (keycode == LEFT)
-		move_a(map);
-	else if (keycode == DOWN)
-		move_s(map);
-	else if (keycode == RIGHT)
-		move_d(map);
-	ft_printf("x = keycode %d %d y = %d lst pos %c collectibles %d moves %d\n", keycode, map->start_pos[0], map->start_pos[1], map->lst_pos, map->collectibles, map->moves);
-	return (0);
+	if (map->lst_pos == 'D')
+		map->map[map->start_pos[0]][map->start_pos[1]] = 'D';
+	else
+		map->map[map->start_pos[0]][map->start_pos[1]] = '0';
 }
-
-// int	i;
-// 	int	j;
-
-// 	i = 0;
-// 	j = 0;
-// 	while (i < map->rows)
-// 	{
-// 		j = 0;
-// 		while (map->map[i][j])
-// 		{
-// 			printf("%c", map->map[i][j]);
-// 			j++;
-// 		}
-// 		printf("\n");
-// 		i++;
-// 	}
