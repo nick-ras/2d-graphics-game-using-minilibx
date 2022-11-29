@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nickras <nickras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 15:45:08 by nickras           #+#    #+#             */
-/*   Updated: 2022/06/17 18:47:19 by nickras          ###   ########.fr       */
+/*   Updated: 2022/11/29 10:45:39 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <fcntl.h>
 
 char	*put_s_str_leftover_in_buf(char *s_str);
+char	*put_s(char *s_str, char *buf, int i, int j);
 void	edit_buf_and_s_str(char *s_str, char *buf);
 char	*read_lines(int fd, char *s_str, char *buf, char *temp);
 char	*get_next_line(int fd);

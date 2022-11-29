@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nickras <nickras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:02:47 by nickras           #+#    #+#             */
-/*   Updated: 2022/06/14 18:05:08 by nickras          ###   ########.fr       */
+/*   Updated: 2022/11/29 09:43:17 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
 //does the same as strlen function - see man
-// size_t	ft_strlen(const char *s)
-// {
-// 	size_t	count;
+size_t	ft_strlen(const char *s)
+{
+	size_t	count;
 
-// 	count = 0;
-// 	while (s[count] != '\0')
-// 	{
-// 		count++;
-// 	}
-// 	return (count);
-// }
+	count = 0;
+	while (s[count] != '\0')
+	{
+		count++;
+	}
+	return (count);
+}
 
 //does the same as strchr function - see man
 char	*ft_strchr(const char *s, int c)

@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 09:49:19 by nickras           #+#    #+#             */
-/*   Updated: 2022/11/28 20:26:23 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/28 23:33:15 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	check_ptr(t_map *map, void *ptr);
 void	set_columns(t_map *grid, char *line_as_str);
 int		main(int argc, char *argv[]);
 
-int		no_event(void *data);
+int		no_event(t_map *data);
 int		update_window(t_map *map);
 
 void	set_picture_pointers(t_map *render);

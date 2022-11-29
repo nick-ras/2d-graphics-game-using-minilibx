@@ -6,15 +6,18 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:20:11 by nick              #+#    #+#             */
-/*   Updated: 2022/11/28 22:38:48 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/28 23:35:53 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int	no_event(void *map)
+int	no_event(t_map *map)
 {
 	(void) map;
+	// free_map(map, 0);
+	// mlx_destroy_window(map->mlx_ptr, map->win_ptr);
+	// mlx_destroy_display(map->mlx_ptr);
 	return (EXIT_SUCCESS);
 }
 
@@ -26,6 +29,7 @@ int	update_window(t_map *map)
 	{
 		free_map(map, 0);
 		mlx_destroy_window(map->mlx_ptr, map->win_ptr);
+		mlx_destroy_display(map->mlx_ptr);
 	}
 	else if (map->won_game == 1 || map->moves < 1)
 		mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, \

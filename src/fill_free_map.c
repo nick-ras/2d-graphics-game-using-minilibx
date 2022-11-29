@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 23:19:38 by lshonta           #+#    #+#             */
-/*   Updated: 2022/11/28 22:48:55 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/29 10:59:46 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	fill_map2(t_map *map, char *argv)
 	if (fd2 < 0)
 	{
 		ft_printf("Error\n");
-		ft_printf("fd error\n");
+		ft_printf("fd didnt work\n");
 		free_map(map, 1);
 	}
 	map->map2 = ft_calloc(map->rows + 1, sizeof(char *));
@@ -35,7 +35,6 @@ void	fill_map2(t_map *map, char *argv)
 			ft_printf("rows is NULL\n");
 			free_map(map, 1);
 		}	
-		//map->map[row_count][map->columns] = '\0';
 		row_count++;
 	}
 	close(fd2);
@@ -50,7 +49,7 @@ void	fill_map(t_map *map, char *argv)
 	if (fd < 0)
 	{
 		ft_printf("Error\n");
-		ft_printf("fd error\n");
+		ft_printf("fd not working\n");
 		free_map(map, 1);
 	}
 	map->map = ft_calloc(map->rows + 1, sizeof(char *));
@@ -58,7 +57,6 @@ void	fill_map(t_map *map, char *argv)
 	while (row_count < map->rows)
 	{
 		map->map[row_count] = get_next_line(fd);
-		//map->map[row_count][map->columns] = '\0';
 		row_count++;
 	}
 	close(fd);
@@ -85,23 +83,31 @@ int	free_map(t_map *map, int exit_func)
 	int	i;
 
 	i = 0;
-	while (++i < map->rows + 1)
+	while (i < map->rows + 1)
 	{
-		free(map->map[i]);
+		if (map->map[i])
+			free(map->map[i]);
 		i++;
 	}
-	free(map->map);
+	if (map->map)
+		free(map->map);
 	if (map->wall_pic)
 	{
-		mlx_destroy_image(map->mlx_ptr, map->collectible_pic);
+		ft_printf("PICTURE EXISTS\n");
+		mlx_destroy_image(map->mlx_ptr, map->finish_pic);
 		mlx_destroy_image(map->mlx_ptr, map->collectible_pic);
 		mlx_destroy_image(map->mlx_ptr, map->door_pic);
 		mlx_destroy_image(map->mlx_ptr, map->space_pic);
 		mlx_destroy_image(map->mlx_ptr, map->player_pic);
 		mlx_destroy_image(map->mlx_ptr, map->wall_pic);
+		// free(map->collectible_pic);
+		// free(map->door_pic);
+		// free(map->space_pic);
+		// free(map->player_pic);
+		// free(map->wall_pic);
 	}
-	if (map->finish_pic)
-		mlx_destroy_image(map->mlx_ptr, map->finish_pic);
+	if (map)
+		free(map);
 	if (exit_func)
 		exit(EXIT_FAILURE);
 	exit(EXIT_SUCCESS);

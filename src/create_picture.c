@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 17:59:53 by lshonta           #+#    #+#             */
-/*   Updated: 2022/11/28 22:45:38 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/28 22:53:53 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,5 @@ void	set_picture_pointers(t_map *map)
 			WIN, &img_width, &img_height);
 	map->img_vert = img_height;
 	map->img_hori = img_width;
-	ft_printf("vert %d hori %d\n", map->img_vert, map->img_hori);
 }
+//ft_printf("vert %d hori %d\n", map->img_vert, map->img_hori);
