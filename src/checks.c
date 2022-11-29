@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:33:43 by nick              #+#    #+#             */
-/*   Updated: 2022/11/29 15:42:02 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/29 18:43:38 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	wall_check(t_map *map)
 
 void	char_check(t_map *map, int i, int j)
 {
-	if (map->map[i][j] != '1' && map->map[i][j] != 'D' && \
+	if (map->map[i][j] != '1' && map->map[i][j] != 'E' && \
 	map->map[i][j] != 'P' && map->map[i][j] != 'C' \
 	&& map->map[i][j] != '0')
 	{
@@ -74,7 +74,7 @@ int	dfs(t_map *map, int count_row, int count_col, int door)
 	}
 	if (map->map2[count_row][count_col] == '1')
 		return (door);
-	if (map->map2[count_row][count_col] == 'D')
+	if (map->map2[count_row][count_col] == 'E')
 		door++;
 	map->map2[count_row][count_col] = '1';
 	door = dfs(map, count_row - 1, count_col, door);
@@ -94,6 +94,7 @@ void	check_valid_route(t_map *map)
 	{
 		ft_printf("Error\n");
 		ft_printf("player cant go to exit\n");
+		free_map2(map);
 		free_map(map, 1);
 	}
 	free_map2(map);

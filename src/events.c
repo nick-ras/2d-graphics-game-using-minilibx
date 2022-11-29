@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:20:11 by nick              #+#    #+#             */
-/*   Updated: 2022/11/29 12:48:22 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/29 18:52:07 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,11 @@ int	key_press(int keycode, t_map *map)
 		move_s(map);
 	else if (keycode == RIGHT)
 		move_d(map);
+	if (map->moves > -1)
+		ft_printf("moves %d\n", map->moves);
 	return (0);
 }
 
-//ft_printf("x = keycode %d %d y = %d lst pos %c collectibles 
-//%d moves %d\n", keycode, map->start_pos[0], map->start_pos[1], 
-//map->lst_pos, map->collectibles, map->moves);
 // int	i;
 // 	int	j;
 
@@ -65,7 +64,7 @@ int	update_window(t_map *map)
 	}
 	else if (map->won_game == 1 || map->moves < 1)
 		mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, \
-		map->finish_pic, map->columns, map->rows);
+		map->finish_pic, map->columns, map->rows * 4);
 	else
 		put_images_on_picture(map);
 	return (0);

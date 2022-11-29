@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 18:50:33 by nick              #+#    #+#             */
-/*   Updated: 2022/11/29 15:45:49 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/29 18:33:38 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	start(t_map *map, int i, int j)
 
 void	door(t_map *map, int i, int j)
 {
-	if (map->map[i][j] == 'D')
+	if (map->map[i][j] == 'E')
 	{
 		if (map->door_count != 0)
 		{
