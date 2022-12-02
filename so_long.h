@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 09:49:19 by nickras           #+#    #+#             */
-/*   Updated: 2022/11/29 15:41:40 by nick             ###   ########.fr       */
+/*   Updated: 2022/11/30 10:11:54 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define SO_LONG_H
 # include "libftprintf/ft_printf.h"
 # include "gnl/get_next_line.h"
-# include "/usr/local/include/mlx.h"
+//# include "/usr/local/include/mlx.h"
 # include <mlx.h>
 # include <X11/Xfuncproto.h>
 # include <X11/extensions/shm.h>
