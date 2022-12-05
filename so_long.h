@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 09:49:19 by nickras           #+#    #+#             */
-/*   Updated: 2022/11/30 10:11:54 by nick             ###   ########.fr       */
+/*   Updated: 2022/12/05 11:59:56 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	wall_check(t_map *data);
 void	wall_check2(t_map *map);
 int		dfs(t_map *grid, int count_row, int count_col, int door);
 
-int		get_fd(char *argv);
+int		get_fd(char *argv, t_map *data);
 void	check_and_malloc(t_map *grid, char *argv);
 void	fill_map(t_map *grid, char *argv);
 void	fill_map2(t_map *grid, char *argv);

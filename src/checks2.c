@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 19:19:46 by nick              #+#    #+#             */
-/*   Updated: 2022/11/29 21:05:20 by nick             ###   ########.fr       */
+/*   Updated: 2022/12/05 12:36:36 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	wall_check2(t_map *map)
 		if (map->map[0][i] != '1' || map->map[map->rows - 1][i] != '1')
 		{
 			ft_printf("Error\n");
-			ft_printf("Error vertical walls ");
+			ft_printf("Error vertical walls\n");
 			free_map2(map);
-			free_map(map, 1);
+			free_map(map, 0);
 		}
 		i++;
 	}
@@ -34,9 +34,8 @@ void	check_rows(t_map *map)
 {
 	if (map->rows < 4 || map->columns < 4 || map->rows == map->columns)
 	{
-		ft_printf("HEY %d%d\n", map->rows, map->columns);
 		ft_printf("Error\n");
-		ft_printf("not enough rows or columns or map is not a rectangle");
+		ft_printf("map is not a rectangle or not enough rows or columns\n");
 		free(map);
 		exit (1);
 	}

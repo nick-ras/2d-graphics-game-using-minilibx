@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 18:50:33 by nick              #+#    #+#             */
-/*   Updated: 2022/11/29 21:07:47 by nick             ###   ########.fr       */
+/*   Updated: 2022/12/05 12:06:51 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,8 @@ void	check_squares(t_map *map)
 	}
 	if (map->door_count < 1 || map->count_start < 1 || map->collectibles < 1)
 	{
-		ft_printf("COLL %d", map->collectibles);
 		ft_printf("Error\n");
-		ft_printf("missing values, could not start, door or collectible.");
+		ft_printf("missing start, door or collectible\n");
 		free_map2(map);
 		free_map(map, 0);
 	}

@@ -6,14 +6,14 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:20:33 by nick              #+#    #+#             */
-/*   Updated: 2022/11/30 10:15:05 by nick             ###   ########.fr       */
+/*   Updated: 2022/12/05 12:00:24 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
-//make re  && ./a.out src/map.ber
+//make re && ./a.out src/map.ber
 
-int	get_fd(char *argv)
+int	get_fd(char *argv, t_map *map)
 {
 	int	fd;
 
@@ -22,6 +22,7 @@ int	get_fd(char *argv)
 	{
 		ft_printf("Error\n");
 		ft_printf("fd error from first open\n");
+		free(map);
 		exit (0);
 	}
 	return (fd);
