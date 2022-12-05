@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 23:19:38 by lshonta           #+#    #+#             */
-/*   Updated: 2022/12/05 12:23:19 by nick             ###   ########.fr       */
+/*   Updated: 2022/12/05 12:40:09 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ void	check_and_malloc(t_map *map, char *argv)
 			free(map);
 			exit (1);
 		}
-
 		free(line_as_str);
 		line_as_str = get_next_line(fd);
 		map->rows++;
