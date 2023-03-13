@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   set_variable_count.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 18:50:33 by nick              #+#    #+#             */
-/*   Updated: 2022/12/05 12:06:51 by nick             ###   ########.fr       */
+/*   Updated: 2023/03/13 14:34:34 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
+/* sets the number of collectibles, doors and entrances etc found in map
+*/
 void	init_map(t_map *map)
 {
 	if (!map)
@@ -32,6 +34,9 @@ void	init_map(t_map *map)
 	map->lst_pos = '0';
 }
 
+/* checks if the map has a valid start position
+*/
+*/
 void	start(t_map *map, int i, int j)
 {
 	if (map->map[i][j] == 'P')
@@ -49,6 +54,8 @@ void	start(t_map *map, int i, int j)
 	}
 }
 
+/* checks if door count is correct
+*/
 void	door(t_map *map, int i, int j)
 {
 	if (map->map[i][j] == 'E')
@@ -65,14 +72,17 @@ void	door(t_map *map, int i, int j)
 		map->door_count++;
 	}
 }
-// ft_printf("door %d and %d \n", map->D[0], map->D[1]);
 
+/* checks for count of collectibles
+*/
 void	collectibles(t_map *map, int i, int j)
 {
 	if (map->map[i][j] == 'C')
 		map->collectibles++;
 }
 
+/* functions the calls the other functions to check the map
+*/
 void	check_squares(t_map *map)
 {
 	int	i;

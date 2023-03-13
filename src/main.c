@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:20:33 by nick              #+#    #+#             */
-/*   Updated: 2022/12/05 12:00:24 by nick             ###   ########.fr       */
+/*   Updated: 2023/03/13 13:30:36 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 //make re && ./a.out src/map.ber
 
+/* gets the file descriptor of the map fil
+*/
 int	get_fd(char *argv, t_map *map)
 {
 	int	fd;
@@ -28,6 +30,8 @@ int	get_fd(char *argv, t_map *map)
 	return (fd);
 }
 
+/* finds the column length of the map
+*/
 void	set_columns(t_map *map, char *line_as_str)
 {
 	int	i;
@@ -37,7 +41,7 @@ void	set_columns(t_map *map, char *line_as_str)
 		i++;
 	map->columns = i;
 }
-//ft_printf("map->columns %d\n", map->columns);
+
 
 int	main(int argc, char *argv[])
 {
