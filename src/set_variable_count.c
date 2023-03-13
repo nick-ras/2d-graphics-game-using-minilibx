@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 18:50:33 by nick              #+#    #+#             */
-/*   Updated: 2023/03/13 14:34:34 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/13 14:49:07 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	init_map(t_map *map)
 }
 
 /* checks if the map has a valid start position
-*/
 */
 void	start(t_map *map, int i, int j)
 {

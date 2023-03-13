@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   free_memory.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 23:19:38 by lshonta           #+#    #+#             */
-/*   Updated: 2022/11/29 13:04:46 by nick             ###   ########.fr       */
+/*   Updated: 2023/03/13 14:38:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
+/* frees the map used for parsing
+*/
 int	free_map2(t_map *map)
 {
 	int	i;
@@ -26,6 +28,8 @@ int	free_map2(t_map *map)
 	return (0);
 }
 
+/* frees the map and windows. Also calls free_pictures
+*/
 int	free_map(t_map *map, int after_window)
 {
 	int	i;
@@ -53,6 +57,8 @@ int	free_map(t_map *map, int after_window)
 	exit(EXIT_FAILURE);
 }
 
+/* frees the pictures
+*/
 void	free_pictures(t_map *map)
 {
 	if (map->wall_pic)

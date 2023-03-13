@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   fill_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 23:19:38 by lshonta           #+#    #+#             */
-/*   Updated: 2022/12/05 12:40:09 by nick             ###   ########.fr       */
+/*   Updated: 2023/03/13 14:39:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
+/* fills the map with the lines from the .ber file. This is used for parsing only
+*/
 void	fill_map2(t_map *map, char *argv)
 {
 	int	row_count;
@@ -34,6 +36,8 @@ void	fill_map2(t_map *map, char *argv)
 	close(fd2);
 }
 
+/* fills the map with the lines from the .ber file. This is used for the program
+*/
 void	fill_map(t_map *map, char *argv)
 {
 	int	row_count;
@@ -59,6 +63,8 @@ void	fill_map(t_map *map, char *argv)
 	wall_check(map);
 }
 
+/* checks the number of rows in the map
+*/
 void	check_and_malloc(t_map *map, char *argv)
 {
 	int		fd;

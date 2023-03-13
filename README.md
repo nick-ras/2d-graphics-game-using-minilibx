@@ -1,6 +1,7 @@
 # so_long
-2d graphics game, see project description for outline of project requirements.
-Program can be run in WSL2 or mac. You have to have x11 forwarding.
+2d graphics game, where have to collect items and find an exit.
+see the subject pdf for  requirements.
+Program can be run in WSL2 or mac. If you use WSL2 then you have to have x11 forwarding.
 
 
 To make library and x11forwarding work, you have to follow instructions from here: https://github.com/42Paris/minilibx-linux.

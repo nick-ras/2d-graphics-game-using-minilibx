@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   create_picture.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 17:59:53 by lshonta           #+#    #+#             */
-/*   Updated: 2022/11/29 18:33:47 by nick             ###   ########.fr       */
+/*   Updated: 2023/03/13 14:44:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
+/* puts the image correcsponring to the map element on the window
+*/
 void	put_images_on_picture_nested(t_map *map, int i, int j)
 {
 	if (map->map[i][j] == '1')
@@ -31,6 +33,7 @@ void	put_images_on_picture_nested(t_map *map, int i, int j)
 		map->collectible_pic, j * map->img_vert, i * map->img_hori);
 }
 
+/* function the iterates through the whole map (2D array) and calls function the puts pixel on window*/
 void	put_images_on_picture(t_map *map)
 {
 	int	i;
@@ -50,6 +53,8 @@ void	put_images_on_picture(t_map *map)
 	}
 }
 
+/* sets the pointers to the images
+*/
 void	set_picture_pointers(t_map *map)
 {
 	int	img_height;

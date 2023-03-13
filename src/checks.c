@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:33:43 by nick              #+#    #+#             */
-/*   Updated: 2022/12/05 12:09:32 by nick             ###   ########.fr       */
+/*   Updated: 2023/03/13 14:48:51 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
+/* checks if the map has a wall on the upper and lower sides
+*/
 void	wall_check(t_map *map)
 {
 	int	i;
@@ -31,6 +33,8 @@ void	wall_check(t_map *map)
 	wall_check2(map);
 }
 
+/* checks if the map has a valid characters
+*/
 void	char_check(t_map *map, int i, int j)
 {
 	if (map->map[i][j] != '1' && map->map[i][j] != 'E' && \
@@ -45,6 +49,8 @@ or lines not same length\n");
 	}
 }
 
+/* Using recursion to check if the player can get to the exit
+*/
 int	dfs(t_map *map, int count_row, int count_col, int door)
 {
 	if (count_row < 0 || count_row >= map->rows || count_col < 0 \
@@ -67,6 +73,8 @@ int	dfs(t_map *map, int count_row, int count_col, int door)
 	return (door);
 }
 
+/* calls dfs to check if the player can get to the exit. If not, then it frees memory
+*/
 void	check_valid_route(t_map *map)
 {
 	int	door;
@@ -83,6 +91,8 @@ void	check_valid_route(t_map *map)
 	free_map2(map);
 }
 
+/* checks if file name is correct, without opening it
+*/
 void	filename_check(char *map)
 {
 	char	*ptr;

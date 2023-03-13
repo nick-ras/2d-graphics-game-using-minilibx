@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   checks2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 19:19:46 by nick              #+#    #+#             */
-/*   Updated: 2022/12/05 12:36:36 by nick             ###   ########.fr       */
+/*   Updated: 2023/03/13 14:47:09 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
+/* checks if the map has a wall on the left and right sides
+*/
 void	wall_check2(t_map *map)
 {
 	int	i;
@@ -30,6 +32,8 @@ void	wall_check2(t_map *map)
 	}
 }
 
+/* checks if the map is big enough and is a square
+*/
 void	check_rows(t_map *map)
 {
 	if (map->rows < 4 || map->columns < 4 || map->rows == map->columns)
@@ -41,6 +45,8 @@ void	check_rows(t_map *map)
 	}
 }
 
+/* checks if win_ptr pointer works
+*/
 void	check_ptr(t_map *map, void *ptr)
 {
 	if (ptr == NULL)
