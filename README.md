@@ -61,4 +61,5 @@ In this project, you'll implement basic graphical functions such as creating a w
 
    ```bash
    make
-./so_long maps/map1.ber
+
+   ./so_long maps/map1.ber
