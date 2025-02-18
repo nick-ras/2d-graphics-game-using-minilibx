@@ -50,7 +50,7 @@ In this project, you'll implement basic graphical functions such as creating a w
 ### Setup Instructions:
 1. Follow the instructions in the [MinilibX Linux setup guide](https://github.com/42Paris/minilibx-linux) to configure X11 forwarding and build the MinilibX library.
 2. Once the library and X11 forwarding are set up, you can test the graphics functionality by running the tests in the `minilibx*/test` folder.
-3. After confirming that everything is working, you can run the project using the provided Makefile.
+3. After confirming that everything is working, you can HOPEFULLY run the project using the provided Makefile.
 
 ---
 
